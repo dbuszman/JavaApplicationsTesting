@@ -44,4 +44,9 @@ public class CalculatorTest {
 		
 	}
 	
+	@Test(expected = ArithmeticException.class)  
+	public void divisionWithExceptionCheck() {  
+		calc.div(2, 0);
+	} 
+	
 }
