@@ -1,9 +1,8 @@
-package com.example.junit;
+package com.example.zad1;
 
 public class Calculator {
-	
+
 	public Calculator(){
-		System.out.println("Calculator: " + this);
 	}
 
 	public int add(int n1, int n2){
@@ -40,5 +39,5 @@ public class Calculator {
 		}
 		
 	}
-
+	
 }

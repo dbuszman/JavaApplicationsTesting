@@ -1,12 +1,14 @@
-package com.example.junit;
+package com.example.zad1;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 public class CalculatorTest {
 
-	private Calculator calc = new Calculator();
+private Calculator calc = new Calculator();
 	
 	@Test
 	public void addCheck(){
