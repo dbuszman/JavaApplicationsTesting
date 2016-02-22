@@ -1,7 +1,7 @@
-package com.example.junit;
+package com.example.zad2;
 
 public class Calculator {
-
+	
 	public double add(double n1, double n2){
 		
 		return n1 + n2;
@@ -36,5 +36,5 @@ public class Calculator {
 		}
 		
 	}
-	
+
 }
