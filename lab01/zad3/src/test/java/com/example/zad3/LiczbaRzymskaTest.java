@@ -1,6 +1,6 @@
-package com.example.junit;
+package com.example.zad3;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import com.example.junit.LiczbaRzymska;
 
 @RunWith(Parameterized.class)
 public class LiczbaRzymskaTest {

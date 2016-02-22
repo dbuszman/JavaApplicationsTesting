@@ -1,10 +1,9 @@
-package com.example.junit;
+package com.example.zad3;
 
 public class LiczbaRzymska {
-
-	private int liczba;
 	
-
+private int liczba;
+	
 	private static int[]    arabskie = { 1000,  900,  500,  400,  100,   90,  
                                       50,   40,   10,    9,    5,    4,    1 };
                                    
@@ -35,5 +34,5 @@ public class LiczbaRzymska {
 	   }
 	   return l_rzymska;
 	}
-	
+
 }
