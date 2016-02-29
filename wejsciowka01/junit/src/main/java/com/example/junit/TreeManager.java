@@ -10,9 +10,8 @@ public class TreeManager {
 	
 	public void addTree(Tree tree){
 		
-		Tree drzewo = new Tree("Jablon", "lisciaste", 3);
 		
-		trees.add(drzewo);
+		trees.add(tree);
 	}
 	
 }
