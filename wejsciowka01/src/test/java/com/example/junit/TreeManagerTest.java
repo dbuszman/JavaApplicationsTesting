@@ -1,8 +1,6 @@
 package com.example.junit;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import java.util.List;
 
 import org.junit.Test;
@@ -21,7 +19,7 @@ public class TreeManagerTest {
 		
 		List<Tree> positionsBefore = treeManager.getAllTrees();
 
-		int treeSizeBeforeAdd = positions.size();
+		int treeSizeBeforeAdd = positionsBefore.size();
 		
 		Tree drzewo = new Tree(NAME_1, TYPE_1, AMOUNT_1);
 		
@@ -30,9 +28,7 @@ public class TreeManagerTest {
 		List<Tree> positionsAfter = treeManager.getAllTrees();
 		
 		int treesAmountShouldBeAfterAdd = treeSizeBeforeAdd + 1;
-		
 		int treeSizeAfterAdd = positionsAfter.size();
-		
 		int treesSub = treeSizeAfterAdd - treeSizeBeforeAdd;
 		
 		assertEquals(treesAmountShouldBeAfterAdd, treesSub);
@@ -46,30 +42,32 @@ public class TreeManagerTest {
 	@Test
 	public void checkRemoving(){
 		
-		List<Tree> positions = treeManager.getAllTrees();
-		
-		int treeSizeBeforeAdd = positions.size();
+		List<Tree> positionsBefore = treeManager.getAllTrees();
+
+		int treeSizeBeforeAdd = positionsBefore.size();
 		
 		Tree drzewo = new Tree(NAME_1, TYPE_1, AMOUNT_1);
 		
 		treeManager.addTree(drzewo);
 		
+		List<Tree> positionsAfterAdd = treeManager.getAllTrees();
+		
 		int treesAmountShouldBeAfterAdd = treeSizeBeforeAdd + 1;
-		
-		int treeSizeAfterAdd = positions.size();
-		
+		int treeSizeAfterAdd = positionsAfterAdd.size();
 		int treesSub = treeSizeAfterAdd - treeSizeBeforeAdd;
 		
 		assertEquals(treesAmountShouldBeAfterAdd, treesSub);
 		
 		treeManager.removeTree(drzewo);
 		
-		int currentShouldBeAmount = treesSub - 1;
+		List<Tree> positionsAfterRemove = treeManager.getAllTrees();
 		
-		int treeSizeAfterRemove = positions.size();
+		int currentShouldBeAmount = treesSub - 1;
+		int treeSizeAfterRemove = positionsAfterRemove.size();
 		
 		assertEquals(currentShouldBeAmount, treeSizeAfterRemove);
 		
+		assertEquals(positionsBefore, positionsAfterRemove);
 	}
 	
 }
