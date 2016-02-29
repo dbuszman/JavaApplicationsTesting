@@ -16,9 +16,17 @@ public class TreeManagerTest {
 	@Test
 	public void checkAdding(){
 
+		int treeSizeBefore = treeManager.trees.size();
+		
 		Tree drzewo = new Tree(NAME_1, TYPE_1, AMOUNT_1);
 		
 		treeManager.addTree(drzewo);
+		
+		int treeSizeAfter = treeManager.trees.size();
+		
+		int treesSub = treeSizeAfter - treeSizeBefore;
+		
+		assertEquals(1, treesSub);
 		
 		assertEquals(NAME_1, treeManager.trees.get(treeManager.trees.size() - 1).getName());
 		assertEquals(TYPE_1, treeManager.trees.get(treeManager.trees.size() - 1).getType());
@@ -26,6 +34,9 @@ public class TreeManagerTest {
 		
 	}
 	
-	
+	@Test
+	public void checkRemoving(){
+		
+	}
 	
 }
