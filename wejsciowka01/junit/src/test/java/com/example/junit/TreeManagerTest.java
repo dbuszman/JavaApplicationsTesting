@@ -9,7 +9,7 @@ public class TreeManagerTest {
 
 		Tree drzewo = new Tree("Jablon", "lisciaste", 2);
 		
-		
+		addTree(Tree drzewo)
 	}
 	
 }
