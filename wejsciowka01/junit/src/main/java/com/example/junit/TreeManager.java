@@ -14,4 +14,10 @@ public class TreeManager {
 		
 	}
 	
+	public void removeTree(Tree tree){
+		
+		trees.remove(tree);
+		
+	}
+	
 }

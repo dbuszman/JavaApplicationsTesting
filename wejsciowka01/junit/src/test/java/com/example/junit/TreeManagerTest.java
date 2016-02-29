@@ -20,10 +20,12 @@ public class TreeManagerTest {
 		
 		treeManager.addTree(drzewo);
 		
-		assertEquals(NAME_1, treeManager.trees.get(0).getName());
-		assertEquals(TYPE_1, treeManager.trees.get(0).getType());
-		assertEquals(AMOUNT_1, treeManager.trees.get(0).getAmount());
+		assertEquals(NAME_1, treeManager.trees.get(treeManager.trees.size() - 1).getName());
+		assertEquals(TYPE_1, treeManager.trees.get(treeManager.trees.size() - 1).getType());
+		assertEquals(AMOUNT_1, treeManager.trees.get(treeManager.trees.size() - 1).getAmount());
 		
 	}
+	
+	
 	
 }
