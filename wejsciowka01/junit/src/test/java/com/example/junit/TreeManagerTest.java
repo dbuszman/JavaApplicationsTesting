@@ -1,5 +1,7 @@
 package com.example.junit;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class TreeManagerTest {
@@ -13,6 +15,8 @@ public class TreeManagerTest {
 		Tree drzewo = new Tree("Jablon", "lisciaste", 2);
 		
 		treeManager.addTree(drzewo);
+		
+		assertEquals(NAME_2, positionRetrieved.getName());
 	}
 	
 }

@@ -10,8 +10,8 @@ public class TreeManager {
 	
 	public void addTree(Tree tree){
 		
-		
 		trees.add(tree);
+		
 	}
 	
 }
