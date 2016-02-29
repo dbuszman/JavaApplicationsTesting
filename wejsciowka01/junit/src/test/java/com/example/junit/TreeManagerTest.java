@@ -3,6 +3,8 @@ package com.example.junit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.util.List;
+
 import org.junit.Test;
 
 public class TreeManagerTest {
@@ -16,31 +18,37 @@ public class TreeManagerTest {
 
 	@Test
 	public void checkAdding(){
+		
+		List<Tree> positionsBefore = treeManager.getAllTrees();
 
-		int treeSizeBeforeAdd = treeManager.trees.size();
+		int treeSizeBeforeAdd = positions.size();
 		
 		Tree drzewo = new Tree(NAME_1, TYPE_1, AMOUNT_1);
 		
 		treeManager.addTree(drzewo);
 		
+		List<Tree> positionsAfter = treeManager.getAllTrees();
+		
 		int treesAmountShouldBeAfterAdd = treeSizeBeforeAdd + 1;
 		
-		int treeSizeAfterAdd = treeManager.trees.size();
+		int treeSizeAfterAdd = positionsAfter.size();
 		
 		int treesSub = treeSizeAfterAdd - treeSizeBeforeAdd;
 		
 		assertEquals(treesAmountShouldBeAfterAdd, treesSub);
 		
-		assertEquals(NAME_1, treeManager.trees.get(treeManager.trees.size() - 1).getName());
-		assertEquals(TYPE_1, treeManager.trees.get(treeManager.trees.size() - 1).getType());
-		assertEquals(AMOUNT_1, treeManager.trees.get(treeManager.trees.size() - 1).getAmount());
+		assertEquals(NAME_1, positionsAfter.get(positionsAfter.size() - 1).getName());
+		assertEquals(TYPE_1, positionsAfter.get(positionsAfter.size() - 1).getType());
+		assertEquals(AMOUNT_1, positionsAfter.get(positionsAfter.size() - 1).getAmount());
 		
 	}
 	
 	@Test
 	public void checkRemoving(){
 		
-		int treeSizeBeforeAdd = treeManager.trees.size();
+		List<Tree> positions = treeManager.getAllTrees();
+		
+		int treeSizeBeforeAdd = positions.size();
 		
 		Tree drzewo = new Tree(NAME_1, TYPE_1, AMOUNT_1);
 		
@@ -48,7 +56,7 @@ public class TreeManagerTest {
 		
 		int treesAmountShouldBeAfterAdd = treeSizeBeforeAdd + 1;
 		
-		int treeSizeAfterAdd = treeManager.trees.size();
+		int treeSizeAfterAdd = positions.size();
 		
 		int treesSub = treeSizeAfterAdd - treeSizeBeforeAdd;
 		
@@ -58,7 +66,7 @@ public class TreeManagerTest {
 		
 		int currentShouldBeAmount = treesSub - 1;
 		
-		int treeSizeAfterRemove = treeManager.trees.size();
+		int treeSizeAfterRemove = positions.size();
 		
 		assertEquals(currentShouldBeAmount, treeSizeAfterRemove);
 		

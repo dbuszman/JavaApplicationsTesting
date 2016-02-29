@@ -19,6 +19,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
+.gitignore
 
 # External tool builders
 .externalToolBuilders/
