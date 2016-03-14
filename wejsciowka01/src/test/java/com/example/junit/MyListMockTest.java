@@ -6,6 +6,9 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,13 +20,13 @@ public class MyListMockTest {
 	private final static String TYPE_1 = "lisciaste";
 	private final static int AMOUNT_1 = 5;
 	
-	private MyList myList;
-	private ITreeManager mock;
+	private TreeManager treeManager;
+	private IMyList mock;
 
 	@Before
 	public void setUp() {
-		mock = createMock(ITreeManager.class);
-		myList = new MyList(mock);
+		mock = createMock(IMyList.class);
+		treeManager = new TreeManager(mock);
 	}
 
 	@Test
@@ -31,14 +34,23 @@ public class MyListMockTest {
 		
 		Tree drzewo = new Tree(NAME_1, TYPE_1, AMOUNT_1);
 		
+		List<Tree> trees = new ArrayList<Tree>();
+		trees.add(drzewo);
+		
 		expect(mock.addTree(drzewo)).andReturn(true).atLeastOnce();
 				
 		expect(mock.removeTree(drzewo)).andReturn(true).atLeastOnce();
+		
+		expect(mock.getAll()).andReturn(trees).anyTimes();
+		
 		replay(mock);
 		
-		assertEquals(true, myList.testAdding(drzewo));
+		assertEquals(true, treeManager.testAdding(drzewo));
 
-		assertEquals(true, myList.testRemoving(drzewo));
+		assertEquals(true, treeManager.testRemoving(drzewo));
+		
+		assertEquals(trees, treeManager.testGettingAllList());
+		
 		verify(mock);
 	}
 }
