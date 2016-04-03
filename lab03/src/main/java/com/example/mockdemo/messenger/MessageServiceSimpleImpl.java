@@ -6,6 +6,17 @@ public class MessageServiceSimpleImpl implements MessageService {
 
 	private Random random = new Random();
 
+	private boolean connectionExists = false;
+	private boolean messageSent = false;
+	
+	public void setConnection(boolean result) {
+		connectionExists = result;
+	}
+	
+	public void setMessageSent(boolean result) {
+		messageSent = result;
+	}
+
 	public ConnectionStatus checkConnection(String server) {
 		// checking the server here ...
 		if (!server.endsWith(".pl")) {
