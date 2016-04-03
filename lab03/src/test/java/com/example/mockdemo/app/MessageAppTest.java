@@ -36,18 +36,6 @@ public class MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_ValidBothMsgSent() {
-		mssi.setMessageSent(true);
-		assertEquals(0, messenger.sendMessage(VALID_SERVER, VALID_MESSAGE));
-	}
-	
-	@Test
-	public void checkSendingMessage_ValidBothMsgSentFail() {
-		mssi.setMessageSent(false);
-		assertEquals(1, messenger.sendMessage(VALID_SERVER, VALID_MESSAGE));
-	}
-	
-	@Test
 	public void checkSendingMessage_ValidSrvInvalidMsg() {
 		assertEquals(2, messenger.sendMessage(VALID_SERVER, INVALID_MESSAGE));	
 	}
@@ -73,54 +61,18 @@ public class MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_NoSrvInvalidMsg() {
+	public void checkSendingMessage_NoSrvValidMsg() {
 		assertEquals(2, messenger.sendMessage(null, VALID_MESSAGE));
 	}
 	
 	@Test
-	public void checkSendingMessage_NoSrvValidMsg() {
+	public void checkSendingMessage_NoSrvInvalidMsg() {
 		assertEquals(2, messenger.sendMessage(null, INVALID_MESSAGE));
 	}
 	
 	@Test
 	public void checkSendingMessage_NoSrvNoMsg() {
 		assertEquals(2, messenger.sendMessage(null, null));
-	}
-	
-	@Test
-	public void testConnection_ValidSrvConnect() {
-		mssi.setConnection(true);
-		assertEquals(0, messenger.testConnection(VALID_SERVER));
-	}
-	
-	@Test
-	public void testConnection_ValidSrvDisconnect() {
-		mssi.setConnection(false);
-		assertEquals(1, messenger.testConnection(VALID_SERVER));
-	}
-	
-	@Test
-	public void testConnection_InvalidSrvConnect() {
-		mssi.setConnection(true);
-		assertEquals(1, messenger.testConnection(INVALID_SERVER));
-	}
-	
-	@Test
-	public void testConnection_InvalidSrvDisconnect() {
-		mssi.setConnection(false);
-		assertEquals(1, messenger.testConnection(INVALID_SERVER));
-	}
-	
-	@Test
-	public void testConnection_NoSrvConnect() {
-		mssi.setConnection(true);
-		assertEquals(1, messenger.testConnection(null));
-	}
-	
-	@Test
-	public void testConnection_NoSrvDisconnect() {
-		mssi.setConnection(false);
-		assertEquals(1, messenger.testConnection(null));
 	}
 
 
