@@ -33,7 +33,6 @@ public class MessageAppTest {
 	public void tearDown() throws Exception {
 		mssi = null;
 		messenger = null;
-
 	}
 	
 	@Test
@@ -86,6 +85,42 @@ public class MessageAppTest {
 	@Test
 	public void checkSendingMessage_NoSrvNoMsg() {
 		assertEquals(2, messenger.sendMessage(null, null));
+	}
+	
+	@Test
+	public void testConnection_ValidSrvConnect() {
+		mssi.setConnection(true);
+		assertEquals(0, messenger.testConnection(VALID_SERVER));
+	}
+	
+	@Test
+	public void testConnection_ValidSrvDisconnect() {
+		mssi.setConnection(false);
+		assertEquals(1, messenger.testConnection(VALID_SERVER));
+	}
+	
+	@Test
+	public void testConnection_InvalidSrvConnect() {
+		mssi.setConnection(true);
+		assertEquals(1, messenger.testConnection(INVALID_SERVER));
+	}
+	
+	@Test
+	public void testConnection_InvalidSrvDisconnect() {
+		mssi.setConnection(false);
+		assertEquals(1, messenger.testConnection(INVALID_SERVER));
+	}
+	
+	@Test
+	public void testConnection_NoSrvConnect() {
+		mssi.setConnection(true);
+		assertEquals(1, messenger.testConnection(null));
+	}
+	
+	@Test
+	public void testConnection_NoSrvDisconnect() {
+		mssi.setConnection(false);
+		assertEquals(1, messenger.testConnection(null));
 	}
 
 
