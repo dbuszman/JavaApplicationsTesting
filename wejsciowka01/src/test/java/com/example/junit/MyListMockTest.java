@@ -87,14 +87,14 @@ public class MyListMockTest {
 		trees.add(drzewo1);
 		trees.add(drzewo2);
 		
-		expect(mock.findByName(NAME_2)).andReturn(drzewo2).atLeastOnce();
+		expect(mock.findByName(NAME_2, trees)).andReturn(drzewo2).atLeastOnce();
 		replay(mock);
-		assertEquals(drzewo2, treeManager.findByName(NAME_2));
+		assertEquals(drzewo2, treeManager.findByName(NAME_2, trees));
 		verify(mock);
 	}
 	
 	@Test
-	public void findingByNameNotExistsCheck() {	
+	public void findingByNameNotExistCheck() {	
 		
 		Tree drzewo1 = new Tree(NAME_1, TYPE_1, AMOUNT_1);
 		Tree drzewo2 = new Tree(NAME_2, TYPE_2, AMOUNT_2);
@@ -103,9 +103,9 @@ public class MyListMockTest {
 		trees.add(drzewo1);
 		trees.add(drzewo2);
 		
-		expect(mock.findByName(WRONG_NAME)).andReturn(null).atLeastOnce();
+		expect(mock.findByName(WRONG_NAME, trees)).andReturn(null).atLeastOnce();
 		replay(mock);
-		assertEquals(null, treeManager.findByName(WRONG_NAME));
+		assertEquals(null, treeManager.findByName(WRONG_NAME, trees));
 		verify(mock);
 	}
 	
@@ -119,9 +119,12 @@ public class MyListMockTest {
 		trees.add(drzewo1);
 		trees.add(drzewo2);
 		
-		expect(mock.findByAmount(AMOUNT_1)).andReturn(drzewo1).atLeastOnce();
+		List<Tree> expectedTrees = new ArrayList<Tree>();
+		expectedTrees.add(drzewo1);
+		
+		expect(mock.findByAmount(AMOUNT_1, trees)).andReturn(expectedTrees).atLeastOnce();
 		replay(mock);
-		assertEquals(drzewo1, treeManager.findByAmount(AMOUNT_1));
+		assertEquals(expectedTrees, treeManager.findByAmount(AMOUNT_1, trees));
 		verify(mock);
 	}
 	

@@ -21,11 +21,11 @@ public class TreeManager {
 		return myList.getAll();
 	}
 	
-	public Tree findByName(String name){
-		return myList.findByName(name);
+	public Tree findByName(String name, List<Tree> trees){
+		return myList.findByName(name, trees);
 	}
 	
-	public Tree findByAmount(int amount){
-		return myList.findByAmount(amount);
+	public List<Tree> findByAmount(int amount, List<Tree> trees){
+		return myList.findByAmount(amount, trees);
 	}
 }
