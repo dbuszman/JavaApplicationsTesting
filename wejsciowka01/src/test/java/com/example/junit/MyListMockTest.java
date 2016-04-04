@@ -85,7 +85,7 @@ public class MyListMockTest {
 	}
 	
 	@Test
-	public void findingByAmount() {	
+	public void findingByAmountCheck() {	
 		
 		Tree drzewo = new Tree(NAME_1, TYPE_1, AMOUNT_1);
 		List<Tree> trees = new ArrayList<Tree>();
