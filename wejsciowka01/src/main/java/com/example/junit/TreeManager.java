@@ -2,30 +2,30 @@ package com.example.junit;
 
 import java.util.List;
 
-public class TreeApp {
+public class TreeManager {
 	
 	private IMyList myList;
 	
-	public TreeApp(IMyList myList) {
+	public TreeManager(IMyList myList) {
 		this.myList = myList;
 	}
 	
-	public boolean testAdding(Tree tree){
+	public boolean adding(Tree tree){
 		return myList.addTree(tree);
 	}
 	
-	public boolean testRemoving(Tree tree){
+	public boolean removing(Tree tree){
 		return myList.removeTree(tree);
 	}
-	public List<Tree> testGettingAllList(){
+	public List<Tree> gettingAllList(){
 		return myList.getAll();
 	}
 	
-	public Tree testFindByName(String name){
+	public Tree findByName(String name){
 		return myList.findByName(name);
 	}
 	
-	public Tree testFindByAmount(int amount){
+	public Tree findByAmount(int amount){
 		return myList.findByAmount(amount);
 	}
 }
