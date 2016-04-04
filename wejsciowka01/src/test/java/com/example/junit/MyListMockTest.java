@@ -94,7 +94,7 @@ public class MyListMockTest {
 	}
 	
 	@Test
-	public void findingByNameCheckNotExists() {	
+	public void findingByNameNotExistsCheck() {	
 		
 		Tree drzewo1 = new Tree(NAME_1, TYPE_1, AMOUNT_1);
 		Tree drzewo2 = new Tree(NAME_2, TYPE_2, AMOUNT_2);
