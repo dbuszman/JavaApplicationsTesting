@@ -2,11 +2,11 @@ package com.example.junit;
 
 import java.util.List;
 
-public class TreeManager {
+public class TreeApp {
 	
 	private IMyList myList;
 	
-	public TreeManager(IMyList myList) {
+	public TreeApp(IMyList myList) {
 		this.myList = myList;
 	}
 	

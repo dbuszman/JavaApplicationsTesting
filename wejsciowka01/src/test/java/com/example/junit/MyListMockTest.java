@@ -21,18 +21,18 @@ public class MyListMockTest {
 	private final static String TYPE_1 = "lisciaste";
 	private final static int AMOUNT_1 = 5;
 	
-	private TreeManager treeManager;
+	private TreeApp treeApp;
 	private IMyList mock;
 
 	@Before
 	public void setUp() {
 		mock = createMock(IMyList.class);
-		treeManager = new TreeManager(mock);
+		treeApp = new TreeApp(mock);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		treeManager = null;
+		treeApp = null;
 		mock = null;
 	}
 
@@ -43,7 +43,7 @@ public class MyListMockTest {
 
 		expect(mock.addTree(drzewo)).andReturn(true).atLeastOnce();
 		replay(mock);
-		assertEquals(true, treeManager.testAdding(drzewo));
+		assertEquals(true, treeApp.testAdding(drzewo));
 		verify(mock);
 	}
 	
@@ -54,7 +54,7 @@ public class MyListMockTest {
 
 		expect(mock.removeTree(drzewo)).andReturn(true).atLeastOnce();
 		replay(mock);
-		assertEquals(true, treeManager.testRemoving(drzewo));
+		assertEquals(true, treeApp.testRemoving(drzewo));
 		verify(mock);
 	}
 	
@@ -67,7 +67,7 @@ public class MyListMockTest {
 		
 		expect(mock.getAll()).andReturn(trees).atLeastOnce();
 		replay(mock);
-		assertEquals(trees, treeManager.testGettingAllList());
+		assertEquals(trees, treeApp.testGettingAllList());
 		verify(mock);
 	}
 	
@@ -80,7 +80,7 @@ public class MyListMockTest {
 		
 		expect(mock.findByName(NAME_1)).andReturn(drzewo).atLeastOnce();
 		replay(mock);
-		assertEquals(drzewo, treeManager.testFindByName(NAME_1));
+		assertEquals(drzewo, treeApp.testFindByName(NAME_1));
 		verify(mock);
 	}
 	
@@ -93,7 +93,7 @@ public class MyListMockTest {
 		
 		expect(mock.findByAmount(AMOUNT_1)).andReturn(drzewo).atLeastOnce();
 		replay(mock);
-		assertEquals(drzewo, treeManager.testFindByAmount(AMOUNT_1));
+		assertEquals(drzewo, treeApp.testFindByAmount(AMOUNT_1));
 		verify(mock);
 	}
 }
