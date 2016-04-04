@@ -28,9 +28,6 @@ public class MyListMockTest {
 	public void setUp() {
 		mock = createMock(IMyList.class);
 		treeManager = new TreeManager(mock);
-		
-
-		
 	}
 
 	@After
