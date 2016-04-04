@@ -6,5 +6,7 @@ public interface IMyList {
 	
 	boolean addTree(Tree tree);
 	boolean removeTree(Tree tree);
-	public List<Tree> getAll();
+	List<Tree> getAll();
+	Tree findByName(String name);
+	Tree findByAmount(int amount);
 }

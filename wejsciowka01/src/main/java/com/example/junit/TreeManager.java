@@ -20,5 +20,12 @@ public class TreeManager {
 	public List<Tree> testGettingAllList(){
 		return myList.getAll();
 	}
-
+	
+	public Tree testFindByName(String name){
+		return myList.findByName(name);
+	}
+	
+	public Tree testFindByAmount(int amount){
+		return myList.findByAmount(amount);
+	}
 }
