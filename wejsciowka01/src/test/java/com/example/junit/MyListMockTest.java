@@ -21,6 +21,10 @@ public class MyListMockTest {
 	private final static String TYPE_1 = "lisciaste";
 	private final static int AMOUNT_1 = 5;
 	
+	private final static String NAME_2 = "Wiśnia";
+	private final static String TYPE_2 = "lisciaste";
+	private final static int AMOUNT_2 = 5;
+	
 	private TreeManager treeManager;
 	private IMyList mock;
 
@@ -74,26 +78,32 @@ public class MyListMockTest {
 	@Test
 	public void findingByNameCheck() {	
 		
-		Tree drzewo = new Tree(NAME_1, TYPE_1, AMOUNT_1);
-		List<Tree> trees = new ArrayList<Tree>();
-		trees.add(drzewo);
+		Tree drzewo1 = new Tree(NAME_1, TYPE_1, AMOUNT_1);
+		Tree drzewo2 = new Tree(NAME_2, TYPE_2, AMOUNT_2);
 		
-		expect(mock.findByName(NAME_1)).andReturn(drzewo).atLeastOnce();
+		List<Tree> trees = new ArrayList<Tree>();
+		trees.add(drzewo1);
+		trees.add(drzewo2);
+		
+		expect(mock.findByName(NAME_2)).andReturn(drzewo2).atLeastOnce();
 		replay(mock);
-		assertEquals(drzewo, treeManager.findByName(NAME_1));
+		assertEquals(drzewo2, treeManager.findByName(NAME_2));
 		verify(mock);
 	}
 	
 	@Test
 	public void findingByAmountCheck() {	
 		
-		Tree drzewo = new Tree(NAME_1, TYPE_1, AMOUNT_1);
-		List<Tree> trees = new ArrayList<Tree>();
-		trees.add(drzewo);
+		Tree drzewo1 = new Tree(NAME_1, TYPE_1, AMOUNT_1);
+		Tree drzewo2 = new Tree(NAME_2, TYPE_2, AMOUNT_2);
 		
-		expect(mock.findByAmount(AMOUNT_1)).andReturn(drzewo).atLeastOnce();
+		List<Tree> trees = new ArrayList<Tree>();
+		trees.add(drzewo1);
+		trees.add(drzewo2);
+		
+		expect(mock.findByAmount(AMOUNT_1)).andReturn(drzewo1).atLeastOnce();
 		replay(mock);
-		assertEquals(drzewo, treeManager.findByAmount(AMOUNT_1));
+		assertEquals(drzewo1, treeManager.findByAmount(AMOUNT_1));
 		verify(mock);
 	}
 }
