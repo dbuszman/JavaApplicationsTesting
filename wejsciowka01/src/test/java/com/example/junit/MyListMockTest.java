@@ -25,6 +25,8 @@ public class MyListMockTest {
 	private final static String TYPE_2 = "lisciaste";
 	private final static int AMOUNT_2 = 5;
 	
+	private final static String WRONG_NAME = "Świerk";
+	
 	private TreeManager treeManager;
 	private IMyList mock;
 
@@ -92,6 +94,22 @@ public class MyListMockTest {
 	}
 	
 	@Test
+	public void findingByNameCheckNotExists() {	
+		
+		Tree drzewo1 = new Tree(NAME_1, TYPE_1, AMOUNT_1);
+		Tree drzewo2 = new Tree(NAME_2, TYPE_2, AMOUNT_2);
+		
+		List<Tree> trees = new ArrayList<Tree>();
+		trees.add(drzewo1);
+		trees.add(drzewo2);
+		
+		expect(mock.findByName(WRONG_NAME)).andReturn(null).atLeastOnce();
+		replay(mock);
+		assertEquals(null, treeManager.findByName(WRONG_NAME));
+		verify(mock);
+	}
+	
+	@Test
 	public void findingByAmountCheck() {	
 		
 		Tree drzewo1 = new Tree(NAME_1, TYPE_1, AMOUNT_1);
@@ -106,4 +124,6 @@ public class MyListMockTest {
 		assertEquals(drzewo1, treeManager.findByAmount(AMOUNT_1));
 		verify(mock);
 	}
+	
+	
 }
