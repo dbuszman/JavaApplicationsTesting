@@ -42,7 +42,7 @@ public class EasyMock01MessageAppTest {
 	}
 
 	@Test
-	public void testConnection_ValidSrv() {
+	public void testConnectionValidSrv() {
 		expect(mock.checkConnection(VALID_SERVER)).andReturn(ConnectionStatus.SUCCESS).atLeastOnce();
 		replay(mock);
 		int respond = messenger.testConnection(VALID_SERVER);
@@ -51,7 +51,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void testConnection_ValidSrvNoConnect() {
+	public void testConnectionValidSrvNoConnect() {
 		expect(mock.checkConnection(VALID_SERVER)).andReturn(ConnectionStatus.FAILURE).atLeastOnce();
 		replay(mock);
 		int respond = messenger.testConnection(VALID_SERVER);
@@ -60,7 +60,7 @@ public class EasyMock01MessageAppTest {
 	}
 
 	@Test
-	public void testConnection_InvalidSrv() {
+	public void testConnectionInvalidSrv() {
 		expect(mock.checkConnection(INVALID_SERVER)).andReturn(ConnectionStatus.FAILURE).atLeastOnce();
 		replay(mock);
 		int respond = messenger.testConnection(INVALID_SERVER);
@@ -69,7 +69,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void testConnection_NoSrv() {
+	public void testConnectionNoSrv() {
 		expect(mock.checkConnection(null)).andReturn(ConnectionStatus.FAILURE).atLeastOnce();
 		replay(mock);
 		int respond = messenger.testConnection(null);
@@ -78,7 +78,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_ValidBothSent() throws MalformedRecipientException {
+	public void checkSendingMessageValidBothSent() throws MalformedRecipientException {
 		expect(mock.send(VALID_SERVER, VALID_MESSAGE)).andReturn(SendingStatus.SENT).atLeastOnce();
 		replay(mock);
 		int respond = messenger.sendMessage(VALID_SERVER, VALID_MESSAGE);
@@ -87,7 +87,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_ValidBothSentFail() throws MalformedRecipientException {
+	public void checkSendingMessageValidBothSentFail() throws MalformedRecipientException {
 		expect(mock.send(VALID_SERVER, VALID_MESSAGE)).andReturn(SendingStatus.SENDING_ERROR).atLeastOnce();
 		replay(mock);
 		int respond = messenger.sendMessage(VALID_SERVER, VALID_MESSAGE);
@@ -96,7 +96,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_ValidSrvInvalidMsg() throws MalformedRecipientException {
+	public void checkSendingMessageValidSrvInvalidMsg() throws MalformedRecipientException {
 		expect(mock.send(VALID_SERVER, INVALID_MESSAGE)).andThrow(new MalformedRecipientException());
 		replay(mock);
 		int respond = messenger.sendMessage(VALID_SERVER, INVALID_MESSAGE);
@@ -105,7 +105,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_ValidSrvNoMsg() throws MalformedRecipientException {
+	public void checkSendingMessageValidSrvNoMsg() throws MalformedRecipientException {
 		expect(mock.send(VALID_SERVER, null)).andThrow(new MalformedRecipientException());
 		replay(mock);
 		int respond = messenger.sendMessage(VALID_SERVER, null);
@@ -114,7 +114,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_InvalidSrvValidMsg() throws MalformedRecipientException {
+	public void checkSendingMessageInvalidSrvValidMsg() throws MalformedRecipientException {
 		expect(mock.send(INVALID_SERVER_TOO_SHORT, VALID_MESSAGE)).andThrow(new MalformedRecipientException());
 		replay(mock);
 		int respond = messenger.sendMessage(INVALID_SERVER_TOO_SHORT, VALID_MESSAGE);
@@ -123,7 +123,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_InvalidBoth() throws MalformedRecipientException {
+	public void checkSendingMessageInvalidBoth() throws MalformedRecipientException {
 		expect(mock.send(INVALID_SERVER_TOO_SHORT, INVALID_MESSAGE)).andThrow(new MalformedRecipientException());
 		replay(mock);
 		int respond = messenger.sendMessage(INVALID_SERVER_TOO_SHORT, INVALID_MESSAGE);
@@ -132,7 +132,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_InvalidSrvNoMsg() throws MalformedRecipientException {
+	public void checkSendingMessageInvalidSrvNoMsg() throws MalformedRecipientException {
 		expect(mock.send(INVALID_SERVER_TOO_SHORT, null)).andThrow(new MalformedRecipientException());
 		replay(mock);
 		int respond = messenger.sendMessage(INVALID_SERVER_TOO_SHORT, null);
@@ -141,7 +141,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_NoSrvValidMsg() throws MalformedRecipientException {
+	public void checkSendingMessageNoSrvValidMsg() throws MalformedRecipientException {
 		expect(mock.send(null, VALID_MESSAGE)).andThrow(new MalformedRecipientException());
 		replay(mock);
 		int respond = messenger.sendMessage(null, VALID_MESSAGE);
@@ -150,7 +150,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_NoSrvInvalidMsg() throws MalformedRecipientException {
+	public void checkSendingMessageNoSrvInvalidMsg() throws MalformedRecipientException {
 		expect(mock.send(null, INVALID_MESSAGE)).andThrow(new MalformedRecipientException());
 		replay(mock);
 		int respond = messenger.sendMessage(null, INVALID_MESSAGE);
@@ -159,7 +159,7 @@ public class EasyMock01MessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_NoSrvNoMsg() throws MalformedRecipientException {
+	public void checkSendingMessageNoSrvNoMsg() throws MalformedRecipientException {
 		expect(mock.send(null, null)).andThrow(new MalformedRecipientException());
 		replay(mock);
 		int respond = messenger.sendMessage(null, null);

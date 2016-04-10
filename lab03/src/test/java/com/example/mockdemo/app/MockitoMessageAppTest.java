@@ -42,7 +42,7 @@ public class MockitoMessageAppTest {
 	}
 
 	@Test
-	public void testConnection_ValidSrv() {
+	public void testConnectionValidSrv() {
 		when(ms.checkConnection(VALID_SERVER)).thenReturn(ConnectionStatus.SUCCESS);
 		int respond = messenger.testConnection(VALID_SERVER);
 		assertThat(respond, is(0));
@@ -50,7 +50,7 @@ public class MockitoMessageAppTest {
 	}
 
 	@Test
-	public void testConnection_ValidSrvNoConnect() {
+	public void testConnectionValidSrvNoConnect() {
 		when(ms.checkConnection(VALID_SERVER)).thenReturn(ConnectionStatus.FAILURE);
 		int respond = messenger.testConnection(VALID_SERVER);
 		assertThat(respond, is(1));
@@ -58,7 +58,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void testConnection_InvalidSrv() {
+	public void testConnectionInvalidSrv() {
 		when(ms.checkConnection(INVALID_SERVER)).thenReturn(ConnectionStatus.FAILURE);
 		int respond = messenger.testConnection(INVALID_SERVER);
 		assertThat(respond, is(1));
@@ -66,7 +66,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void testConnection_NoSrv() {
+	public void testConnectionNoSrv() {
 		when(ms.checkConnection(null)).thenReturn(ConnectionStatus.FAILURE);
 		int respond = messenger.testConnection(null);
 		assertThat(respond, is(1));
@@ -74,7 +74,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_ValidBothSent() throws MalformedRecipientException {
+	public void checkSendingMessageValidBothSent() throws MalformedRecipientException {
 		when(ms.send(VALID_SERVER, VALID_MESSAGE)).thenReturn(SendingStatus.SENT);
 		int respond = messenger.sendMessage(VALID_SERVER, VALID_MESSAGE);
 		assertThat(respond, is(0));
@@ -82,7 +82,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_ValidBothSentFail() throws MalformedRecipientException {
+	public void checkSendingMessageValidBothSentFail() throws MalformedRecipientException {
 		when(ms.send(VALID_SERVER, VALID_MESSAGE)).thenReturn(SendingStatus.SENDING_ERROR);
 		int respond = messenger.sendMessage(VALID_SERVER, VALID_MESSAGE);
 		assertThat(respond, is(1));
@@ -90,7 +90,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_ValidSrvInvalidMsg() throws MalformedRecipientException {
+	public void checkSendingMessageValidSrvInvalidMsg() throws MalformedRecipientException {
 		when(ms.send(VALID_SERVER, INVALID_MESSAGE)).thenThrow(new MalformedRecipientException());
 		int respond = messenger.sendMessage(VALID_SERVER, INVALID_MESSAGE);
 		assertThat(respond, is(2));
@@ -98,7 +98,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_ValidSrvNoMsg() throws MalformedRecipientException {
+	public void checkSendingMessageValidSrvNoMsg() throws MalformedRecipientException {
 		when(ms.send(VALID_SERVER, null)).thenThrow(new MalformedRecipientException());
 		int respond = messenger.sendMessage(VALID_SERVER, null);
 		assertThat(respond, is(2));
@@ -106,7 +106,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_InvalidSrvValidMsg() throws MalformedRecipientException {
+	public void checkSendingMessageInvalidSrvValidMsg() throws MalformedRecipientException {
 		when(ms.send(INVALID_SERVER_TOO_SHORT, VALID_MESSAGE)).thenThrow(new MalformedRecipientException());
 		int respond = messenger.sendMessage(INVALID_SERVER_TOO_SHORT, VALID_MESSAGE);
 		assertThat(respond, is(2));
@@ -114,7 +114,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_InvalidBoth() throws MalformedRecipientException {
+	public void checkSendingMessageInvalidBoth() throws MalformedRecipientException {
 		when(ms.send(INVALID_SERVER_TOO_SHORT, INVALID_MESSAGE)).thenThrow(new MalformedRecipientException());
 		int respond = messenger.sendMessage(INVALID_SERVER_TOO_SHORT, INVALID_MESSAGE);
 		assertThat(respond, is(2));
@@ -122,7 +122,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_InvalidSrvNoMsg() throws MalformedRecipientException {
+	public void checkSendingMessageInvalidSrvNoMsg() throws MalformedRecipientException {
 		when(ms.send(INVALID_SERVER_TOO_SHORT, null)).thenThrow(new MalformedRecipientException());
 		int respond = messenger.sendMessage(INVALID_SERVER_TOO_SHORT, null);
 		assertThat(respond, is(2));
@@ -130,7 +130,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_NoSrvValidMsg() throws MalformedRecipientException {
+	public void checkSendingMessageNoSrvValidMsg() throws MalformedRecipientException {
 		when(ms.send(null, VALID_MESSAGE)).thenThrow(new MalformedRecipientException());
 		int respond = messenger.sendMessage(null, VALID_MESSAGE);
 		assertThat(respond, is(2));
@@ -138,7 +138,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_NoSrvInvalidMsg() throws MalformedRecipientException {
+	public void checkSendingMessageNoSrvInvalidMsg() throws MalformedRecipientException {
 		when(ms.send(null, INVALID_MESSAGE)).thenThrow(new MalformedRecipientException());
 		int respond = messenger.sendMessage(null, INVALID_MESSAGE);
 		assertThat(respond, is(2));
@@ -146,7 +146,7 @@ public class MockitoMessageAppTest {
 	}
 	
 	@Test
-	public void checkSendingMessage_NoSrvNoMsg() throws MalformedRecipientException {
+	public void checkSendingMessageNoSrvNoMsg() throws MalformedRecipientException {
 		when(ms.send(null, null)).thenThrow(new MalformedRecipientException());
 		int respond = messenger.sendMessage(null, null);
 		assertThat(respond, is(2));
