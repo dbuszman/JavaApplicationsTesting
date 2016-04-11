@@ -11,8 +11,27 @@ public class MessengerBDD {
 	public MessengerBDD(MessageService ms) {
 		this.ms = ms;
 	}
+	
+	private String server;
+	private String message;
+	
+	public String getServer() {
+		return server;
+	}
 
-	public int testConnection(String server) {
+	public void setServer(String server) {
+		this.server = server;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public int testConnection() {
 		switch (ms.checkConnection(server)) {
 		case FAILURE:
 			return 1;
@@ -22,7 +41,7 @@ public class MessengerBDD {
 		return 1;
 	}
 
-	public int sendMessage(String server, String message) {
+	public int sendMessage() {
 
 		int result = -1;
 
