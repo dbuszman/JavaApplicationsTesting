@@ -17,3 +17,5 @@ Then sending message should be 2
 Given a messenger
 When set server to not set and message to not set
 Then sending message should be 2
+
+
