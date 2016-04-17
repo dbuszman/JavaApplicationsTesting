@@ -28,7 +28,6 @@ Given a messenger
 When set server to: inf.ug.edu.pl and message to: some message
 Then sending message could be 0 or 1
 
+Given a messenger
 When set server to: trojmiasto.gda.pl and message to: correct message
 Then sending message could be 0 or 1
-
-Scenario: 
