@@ -30,4 +30,4 @@ public class MessengerTest extends JUnitStory {
 		// varargs, can have more that one steps classes
 		return new InstanceStepsFactory(configuration(), new MessengerSteps());
 	}
-}
+} 	
