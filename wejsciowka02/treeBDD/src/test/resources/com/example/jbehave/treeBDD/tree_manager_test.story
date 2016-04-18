@@ -11,5 +11,5 @@ Then added tree should have name Jablon
 
 Scenario: Removing test
 Given a TreeManager
-When set name to: Jablon, type to: Lisciaste and amount to: 2
-Then removing should decrease trees by 1
+When removing tree where name is Jablon, type is Lisciaste and amount is 2
+Then trees should decrease by 1

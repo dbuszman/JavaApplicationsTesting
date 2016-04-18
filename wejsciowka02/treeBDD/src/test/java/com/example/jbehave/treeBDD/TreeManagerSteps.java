@@ -43,6 +43,12 @@ public class TreeManagerSteps {
 		tree.setAmount(amount);
 	}
 	
+	@When("removing tree where name is $name, type is $type and amount is $amount")
+	public void setArgumentsToRemove(String name, String type, int amount){
+		tree.setName(name);
+		tree.setType(type);
+		tree.setAmount(amount);
+	}
 
 	@Then("adding should increase trees by $amount")
 	public void amountShouldBe(int amount) {
@@ -67,7 +73,7 @@ public class TreeManagerSteps {
 		assertEquals(name, addedName);
 	}
 	
-	@Then("removing should decrease trees by $amount")
+	@Then("trees should decrease by $amount")
 	public void amountRemovedShouldBe(int amount) {
 		
 		manager.addTree(tree);
