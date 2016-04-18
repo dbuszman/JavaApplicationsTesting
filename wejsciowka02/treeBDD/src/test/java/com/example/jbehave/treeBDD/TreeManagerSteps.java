@@ -2,6 +2,9 @@ package com.example.jbehave.treeBDD;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -49,6 +52,19 @@ public class TreeManagerSteps {
 		int amountAfter = manager.countTrees();
 		
 		assertEquals(amount, amountAfter - amountBefore);
+	}
+	
+	@Then("added tree should have name $name")
+	public void nameShouldBe(String name) {
+		
+		manager.addTree(tree);
+		List<Tree> trees = new ArrayList<Tree>();
+		
+		trees = manager.getAllList();
+		
+		String addedName = trees.get(trees.size() - 1).getName();
+		
+		assertEquals(name, addedName);
 	}
 
 
