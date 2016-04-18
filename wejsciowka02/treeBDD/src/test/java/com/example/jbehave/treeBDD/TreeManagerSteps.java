@@ -66,6 +66,18 @@ public class TreeManagerSteps {
 		
 		assertEquals(name, addedName);
 	}
+	
+	@Then("removing should decrease trees by $amount")
+	public void amountRemovedShouldBe(int amount) {
+		
+		manager.addTree(tree);
+		manager.addTree(tree);
+		int amountBefore = manager.countTrees();
+		manager.removeTree(tree);
+		int amountAfter = manager.countTrees();
+		
+		assertEquals(amount, amountBefore - amountAfter);
+	}
 
 
 }
