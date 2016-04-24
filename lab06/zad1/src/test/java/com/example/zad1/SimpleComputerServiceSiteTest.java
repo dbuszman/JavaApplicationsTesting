@@ -8,9 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -25,15 +23,15 @@ public class SimpleComputerServiceSiteTest {
 	private static WebDriver driver;
 	WebElement element;
 	
-	
 	private static final String USERNAME = "Admin";
 	private static final String PASSWORD = "Admin@1";
 	
 	private static final String LASTNAME = "Kowalski";
 	private static final String FIRSTMIDNAME = "Jan";
 	private static final String SPECIALIZATION = "Notebooks";
-    private static final String TELEPHONE = "241-532-421";
+	private static final String TELEPHONE = "241-532-421";
 
+	
 	@Before
 	public void driverSetup() {
 		driver = new FirefoxDriver();
@@ -60,15 +58,6 @@ public class SimpleComputerServiceSiteTest {
 		String expectedHeader = "Log in.";
 		
 		assertEquals(expectedHeader, header);
-		/*File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-	    assertNotNull(screenshot);
-
-		try {
-			FileUtils.copyFile(screenshot, new File("test/resources/polsat.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		assertTrue(true);*/
 	}
 	
 	@Test
@@ -107,7 +96,8 @@ public class SimpleComputerServiceSiteTest {
 		element.submit();
 		
 		File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-	    assertNotNull(screenshot);
+	    
+		assertNotNull(screenshot);
 
 		try {
 			FileUtils.copyFile(screenshot, new File("test/resources/before-add.png"));
@@ -132,7 +122,8 @@ public class SimpleComputerServiceSiteTest {
 		element.submit();
 		
 		File screenshot2 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-	    assertNotNull(screenshot);
+	    
+		assertNotNull(screenshot);
 
 		try {
 			FileUtils.copyFile(screenshot2, new File("test/resources/after-add.png"));
