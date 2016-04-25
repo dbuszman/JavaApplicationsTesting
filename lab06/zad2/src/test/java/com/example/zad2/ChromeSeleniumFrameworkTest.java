@@ -56,7 +56,24 @@ public class ChromeSeleniumFrameworkTest {
 		assertEquals("Option 2", selectedOption);
 	}
 	
+	@Test
+	public void verificationCodeTest(){
+		driver.get("http://www.seleniumframework.com/Practiceform/");
+		element = driver.findElement(By.xpath("id('item-vfb-2')/ul/li[1]/span/label"));
+		
+		String verCode = element.getText();
+		verCode = verCode.substring(verCode.length() - 2);
 
+		element = driver.findElement(By.id("vfb-3"));
+		element.sendKeys(verCode);
+		
+		driver.findElement(By.name("vfb-submit")).click();
+		
+		element = driver.findElement(By.id("form_success"));
+		
+		assertEquals("Your form was successfully submitted. Thank you for contacting us.", element.getText());
+	}
+	
 	@AfterClass
 	public static void cleanup() {
 		driver.quit();
