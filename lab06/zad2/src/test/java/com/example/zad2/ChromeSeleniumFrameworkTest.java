@@ -1,6 +1,7 @@
 package com.example.zad2;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,6 +12,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
 
 public class ChromeSeleniumFrameworkTest {
 	
@@ -42,6 +45,16 @@ public class ChromeSeleniumFrameworkTest {
 		assertTrue(firstOptionIsChecked);
 	}
 	
+	@Test
+	public void selectTest(){
+		driver.get("http://www.seleniumframework.com/Practiceform/");
+		Select select = new Select(driver.findElement(By.xpath("id('vfb-12')"))); 
+		select.selectByVisibleText("Option 2");
+		
+		String selectedOption = new Select(driver.findElement(By.xpath("id('vfb-12')"))).getFirstSelectedOption().getText();
+		
+		assertEquals("Option 2", selectedOption);
+	}
 	
 
 	@AfterClass
