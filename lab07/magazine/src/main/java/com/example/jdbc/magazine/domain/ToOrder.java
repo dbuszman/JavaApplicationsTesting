@@ -4,7 +4,7 @@ public class ToOrder {
 
 	private long idOrder;
 	
-	private long idMagazyn;
+	private long idMagazine;
 	
 	private int orderedAmount;
 	
@@ -26,12 +26,12 @@ public class ToOrder {
 		this.idOrder = idOrder;
 	}
 
-	public long getMagazynId() {
-		return idMagazyn;
+	public long getMagazineId() {
+		return idMagazine;
 	}
 
-	public void setMagazynId(long idMagazyn) {
-		this.idMagazyn = idMagazyn;
+	public void setMagazineId(long idMagazine) {
+		this.idMagazine = idMagazine;
 	}
 
 	public int getOrderedAmount() {
