@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Test;
 
 import com.example.jdbc.magazine.domain.Magazine;
@@ -32,6 +33,11 @@ public class MagazineManagerTest {
 	private final static int DEFAULT_MARGIN = 15;
 	private final static int MIN_AMOUNT = 2;
 
+	@After
+	public void cleanUp() throws SQLException {
+		magazineManager.removePositions();
+	}
+
 	@Test
 	public void checkConnection() {
 		assertNotNull(magazineManager.getConnection());
@@ -39,8 +45,6 @@ public class MagazineManagerTest {
 
 	@Test
 	public void checkAdding() throws SQLException {
-
-		magazineManager.removePositions();
 
 		Magazine position = new Magazine(NAME_1, AMOUNT_1, MARGIN_1);
 		Magazine position2 = new Magazine(NAME_2, AMOUNT_2, MARGIN_2);
@@ -60,8 +64,6 @@ public class MagazineManagerTest {
 	@Test
 	public void checkRemovingOneElement() throws SQLException {
 
-		magazineManager.removePositions();
-
 		Magazine position = new Magazine(NAME_1, AMOUNT_1, MARGIN_1);
 
 		assertEquals(1, magazineManager.addPosition(position));
@@ -70,8 +72,6 @@ public class MagazineManagerTest {
 
 	@Test
 	public void checkUpdating() throws SQLException {
-
-		magazineManager.removePositions();
 
 		Magazine positionToUpdate = new Magazine(NAME_2, AMOUNT_2, MARGIN_2);
 
@@ -89,8 +89,6 @@ public class MagazineManagerTest {
 	@Test
 	public void checkCountingRecords() throws SQLException {
 
-		magazineManager.removePositions();
-
 		Magazine position1 = new Magazine(NAME_1, AMOUNT_1, MARGIN_1);
 		Magazine position2 = new Magazine(NAME_2, AMOUNT_2, MARGIN_2);
 		Magazine position3 = new Magazine(NAME_3, AMOUNT_3, MARGIN_3);
@@ -102,6 +100,26 @@ public class MagazineManagerTest {
 		magazineManager.addPosition(position4);
 
 		assertEquals(4, magazineManager.getCount());
+	}
+
+	@Test
+	public void checkRemovingAllPositions() throws SQLException {
+
+		Magazine position1 = new Magazine(NAME_1, AMOUNT_1, MARGIN_1);
+		Magazine position2 = new Magazine(NAME_2, AMOUNT_2, MARGIN_2);
+		Magazine position3 = new Magazine(NAME_3, AMOUNT_3, MARGIN_3);
+		Magazine position4 = new Magazine(NAME_4, AMOUNT_4, MARGIN_4);
+
+		magazineManager.addPosition(position1);
+		magazineManager.addPosition(position2);
+		magazineManager.addPosition(position3);
+		magazineManager.addPosition(position4);
+
+		magazineManager.removePositions();
+
+		int countingResult = magazineManager.getCount();
+
+		assertEquals(0, countingResult);
 	}
 
 }

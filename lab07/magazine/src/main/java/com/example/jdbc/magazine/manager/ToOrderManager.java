@@ -27,6 +27,8 @@ private Connection connection;
 	private PreparedStatement deleteAllOrdersStmt;
 	private PreparedStatement updateOrderStmt;
 	private PreparedStatement getAllOrdersStmt;
+	private PreparedStatement countAllOrdersStmt;
+
 
 	private Statement statement;
 
@@ -62,7 +64,8 @@ private Connection connection;
 					.prepareStatement("SELECT id_order, id_magazine, amount_to_order, price FROM ToOrder");
 			updateOrderStmt = connection
 					.prepareStatement("UPDATE ToOrder SET id_magazine = ? WHERE id_order = ?");
-			
+			countAllOrdersStmt = connection
+					.prepareStatement("SELECT COUNT(*) FROM ToOrder");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -91,6 +94,7 @@ private Connection connection;
 	}
 	
 	void removeOrders() throws SQLException {
+		
 		try {
 			connection.setAutoCommit(false);
 			deleteAllOrdersStmt.executeUpdate();
@@ -165,5 +169,18 @@ private Connection connection;
 			e.printStackTrace();
 		}
 		return orders;
+	}
+	
+	public int getCount() {
+
+		try {
+			ResultSet result = countAllOrdersStmt.executeQuery();
+			if (result.next()) {
+				return result.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

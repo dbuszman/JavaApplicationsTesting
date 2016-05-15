@@ -3,21 +3,21 @@ package com.example.jdbc.magazine.domain;
 public class ToOrder {
 
 	private long idOrder;
-	
+
 	private long idMagazine;
-	
+
 	private int orderedAmount;
-	
+
 	private double price;
-	
+
 	public ToOrder() {
 	}
-	
-	public ToOrder(int orderedAmount, double price){
+
+	public ToOrder(int orderedAmount, double price) {
 		this.orderedAmount = orderedAmount;
 		this.price = price;
 	}
-	
+
 	public long getId() {
 		return idOrder;
 	}

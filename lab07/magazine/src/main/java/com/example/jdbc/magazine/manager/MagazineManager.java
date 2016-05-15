@@ -49,10 +49,14 @@ public class MagazineManager {
 					.prepareStatement("INSERT INTO Magazine (name, amount, margin) VALUES (?, ?, ?)");
 			updatePositionsStmt = connection
 					.prepareStatement("UPDATE Magazine SET margin = ? WHERE amount < ? and id_position = ?");
-			deleteOnePositionStmt = connection.prepareStatement("DELETE FROM Magazine WHERE id_position = ?");
-			deleteAllPositionsStmt = connection.prepareStatement("DELETE FROM Magazine");
-			getAllPositionsStmt = connection.prepareStatement("SELECT id_position, name, amount, margin FROM Magazine");
-			countAllPositionsStmt = connection.prepareStatement("SELECT COUNT(*) FROM Magazine");
+			deleteOnePositionStmt = connection
+					.prepareStatement("DELETE FROM Magazine WHERE id_position = ?");
+			deleteAllPositionsStmt = connection
+					.prepareStatement("DELETE FROM Magazine");
+			getAllPositionsStmt = connection
+					.prepareStatement("SELECT id_position, name, amount, margin FROM Magazine");
+			countAllPositionsStmt = connection
+					.prepareStatement("SELECT COUNT(*) FROM Magazine");
 
 		} catch (SQLException e) {
 			e.printStackTrace();

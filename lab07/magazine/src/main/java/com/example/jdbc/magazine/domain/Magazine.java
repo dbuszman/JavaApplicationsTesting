@@ -1,24 +1,24 @@
 package com.example.jdbc.magazine.domain;
 
 public class Magazine {
-	
+
 	private long idPosition;
-	
+
 	private String name;
-	
+
 	private int amount;
-	
+
 	private int margin;
 
-	public Magazine(){
+	public Magazine() {
 	}
-	
-	public Magazine(String name, int amount, int margin){
+
+	public Magazine(String name, int amount, int margin) {
 		this.name = name;
 		this.amount = amount;
 		this.margin = margin;
 	}
-	
+
 	public long getId() {
 		return idPosition;
 	}
@@ -50,5 +50,5 @@ public class Magazine {
 	public void setMargin(int margin) {
 		this.margin = margin;
 	}
-	
+
 }
