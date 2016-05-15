@@ -121,5 +121,19 @@ public class MagazineManagerTest {
 
 		assertEquals(0, countingResult);
 	}
+	
+	@Test
+	public void checkFindingRecordsByAmount() {
+		
+		Magazine position1 = new Magazine(NAME_1, AMOUNT_1, MARGIN_1);
+		Magazine position2 = new Magazine(NAME_2, AMOUNT_2, MARGIN_2);
+		
+		magazineManager.addPosition(position1);
+		magazineManager.addPosition(position2);
+		
+		int numberOfPositions = magazineManager.getPositionsWithLowAmount(MIN_AMOUNT).size();
+		
+		assertEquals(1, numberOfPositions);
+	}
 
 }

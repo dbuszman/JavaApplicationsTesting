@@ -25,6 +25,7 @@ public class MagazineManager {
 	private PreparedStatement getAllPositionsStmt;
 	private PreparedStatement updatePositionsStmt;
 	private PreparedStatement countAllPositionsStmt;
+	private PreparedStatement getPositionsWithLowAmountStmt;
 
 	private Statement statement;
 
@@ -57,6 +58,8 @@ public class MagazineManager {
 					.prepareStatement("SELECT id_position, name, amount, margin FROM Magazine");
 			countAllPositionsStmt = connection
 					.prepareStatement("SELECT COUNT(*) FROM Magazine");
+			getPositionsWithLowAmountStmt = connection
+					.prepareStatement("Select id_position, name, amount, margin FROM Magazine WHERE amount < ?");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -162,6 +165,28 @@ public class MagazineManager {
 			e.printStackTrace();
 		}
 		return positions;
+	}
+	
+	public List<Magazine> getPositionsWithLowAmount(int amount){
+		
+		List<Magazine> positionsWithLowAmount = new ArrayList<Magazine>();
+		
+		try{
+			getPositionsWithLowAmountStmt.setInt(1, amount);
+			ResultSet rs = getPositionsWithLowAmountStmt.executeQuery();
+			while (rs.next()) {
+				Magazine position = new Magazine();
+				position.setId(rs.getInt("id_position"));
+				position.setName(rs.getString("name"));
+				position.setAmount(rs.getInt("amount"));
+				position.setMargin(rs.getInt("margin"));
+				positionsWithLowAmount.add(position);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return positionsWithLowAmount;
 	}
 
 }
