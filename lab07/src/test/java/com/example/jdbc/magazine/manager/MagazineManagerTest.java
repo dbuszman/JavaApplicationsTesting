@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Test;
 
 import com.example.jdbc.magazine.domain.Magazine;
@@ -33,10 +32,6 @@ public class MagazineManagerTest {
 	private final static int DEFAULT_MARGIN = 15;
 	private final static int MIN_AMOUNT = 2;
 
-	@After
-	public void cleanUp() throws SQLException {
-		magazineManager.removePositions();
-	}
 
 	@Test
 	public void checkConnection() {
@@ -73,6 +68,8 @@ public class MagazineManagerTest {
 	@Test
 	public void checkUpdating() throws SQLException {
 
+		magazineManager.removePositions();
+		
 		Magazine positionToUpdate = new Magazine(NAME_2, AMOUNT_2, MARGIN_2);
 
 		assertEquals(1, magazineManager.addPosition(positionToUpdate));
@@ -88,6 +85,8 @@ public class MagazineManagerTest {
 
 	@Test
 	public void checkCountingRecords() throws SQLException {
+		
+		int currentCountingResult = magazineManager.getCount();
 
 		Magazine position1 = new Magazine(NAME_1, AMOUNT_1, MARGIN_1);
 		Magazine position2 = new Magazine(NAME_2, AMOUNT_2, MARGIN_2);
@@ -98,8 +97,10 @@ public class MagazineManagerTest {
 		magazineManager.addPosition(position2);
 		magazineManager.addPosition(position3);
 		magazineManager.addPosition(position4);
+		
+		int countingResult = magazineManager.getCount();
 
-		assertEquals(4, magazineManager.getCount());
+		assertEquals(4, countingResult - currentCountingResult);
 	}
 
 	@Test
@@ -125,6 +126,8 @@ public class MagazineManagerTest {
 	@Test
 	public void checkFindingRecordsByAmount() {
 		
+		int currentNumberOfPositions = magazineManager.getPositionsWithLowAmount(MIN_AMOUNT).size();
+		
 		Magazine position1 = new Magazine(NAME_1, AMOUNT_1, MARGIN_1);
 		Magazine position2 = new Magazine(NAME_2, AMOUNT_2, MARGIN_2);
 		
@@ -133,7 +136,7 @@ public class MagazineManagerTest {
 		
 		int numberOfPositions = magazineManager.getPositionsWithLowAmount(MIN_AMOUNT).size();
 		
-		assertEquals(1, numberOfPositions);
+		assertEquals(1, numberOfPositions - currentNumberOfPositions);
 	}
 
 }

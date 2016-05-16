@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,12 +32,6 @@ public class ToOrderManagerTest {
 	@Before
 	public void prepareForeignKey() {
 		magazineManager.addPosition(position);
-	}
-
-	@After
-	public void cleanUp() throws SQLException {
-		toOrderManager.removeOrders();
-		magazineManager.removePositions();
 	}
 
 	@Test
@@ -99,6 +92,8 @@ public class ToOrderManagerTest {
 	@Test
 	public void checkCountingElements() throws SQLException {
 
+		int currentCountingResult = toOrderManager.getCount();
+		
 		ToOrder order = new ToOrder(ORDEREDAMOUNT_1, PRICE_1);
 		ToOrder order2 = new ToOrder(ORDEREDAMOUNT_2, PRICE_2);
 
@@ -107,7 +102,7 @@ public class ToOrderManagerTest {
 
 		int countingResult = toOrderManager.getCount();
 
-		assertEquals(2, countingResult);
+		assertEquals(2, countingResult - currentCountingResult);
 	}
 
 	@Test
