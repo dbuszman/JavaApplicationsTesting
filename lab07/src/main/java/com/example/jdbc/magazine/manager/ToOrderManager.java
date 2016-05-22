@@ -79,12 +79,10 @@ private Connection connection;
 	}
 	
 	int removeOneOrder(ToOrder order) {
-		List<Magazine> positions = magazineManager.getAllPositions();
-		Magazine positionRetrieved = positions.get(0);
 		
 		int count = 0;
 		try {
-			deleteOneOrderStmt.setLong(1, positionRetrieved.getId());
+			deleteOneOrderStmt.setLong(1, order.getId());
 			count = deleteOneOrderStmt.executeUpdate();
 		}
 		catch (SQLException e){

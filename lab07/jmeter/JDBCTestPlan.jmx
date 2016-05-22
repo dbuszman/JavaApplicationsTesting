@@ -42,7 +42,7 @@
           <stringProp name="password"></stringProp>
         </JDBCDataSource>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="JDBC Request" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Insert Request" enabled="true">
           <stringProp name="dataSource">MyJDBCPool</stringProp>
           <stringProp name="query">INSERT INTO Magazine (name, amount, margin) VALUES (?, ?, ?)</stringProp>
           <stringProp name="queryArguments">Intel i5 3Ghz 6gen, 5, 8</stringProp>
@@ -54,7 +54,7 @@
           <stringProp name="variableNames"></stringProp>
         </JDBCSampler>
         <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="JDBC Request" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Select Request" enabled="true">
           <stringProp name="dataSource">MyJDBCPool</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="query">SELECT id_position, name, amount, margin FROM Magazine</stringProp>
@@ -108,6 +108,27 @@
           </objProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Random Insert Request" enabled="true">
+          <stringProp name="dataSource">MyJDBCPool</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">INSERT INTO Magazine (name, amount, margin) VALUES (?, ?, ?)</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Variable" enabled="true">
+          <stringProp name="maximumValue"></stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <boolProp name="perThread">false</boolProp>
+          <stringProp name="randomSeed"></stringProp>
+          <stringProp name="variableName"></stringProp>
+        </RandomVariableConfig>
         <hashTree/>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Grupa wątków" enabled="true">

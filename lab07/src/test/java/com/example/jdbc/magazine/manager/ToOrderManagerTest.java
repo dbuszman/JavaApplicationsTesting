@@ -85,8 +85,17 @@ public class ToOrderManagerTest {
 
 		ToOrder order = new ToOrder(ORDEREDAMOUNT_1, PRICE_1);
 
-		assertEquals(1, toOrderManager.addOrder(order));
-		assertEquals(0, toOrderManager.removeOneOrder(order));
+		toOrderManager.addOrder(order);
+		order.setId(toOrderManager.getAllOrders().get(0).getId());
+		
+		int currentCountingResult = toOrderManager.getCount();
+		
+		toOrderManager.removeOneOrder(order);
+		
+		int countingResult = toOrderManager.getCount();
+		
+		assertEquals(1, currentCountingResult - countingResult);
+		
 	}
 
 	@Test

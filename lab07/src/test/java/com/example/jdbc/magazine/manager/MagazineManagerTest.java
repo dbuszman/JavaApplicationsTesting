@@ -61,8 +61,17 @@ public class MagazineManagerTest {
 
 		Magazine position = new Magazine(NAME_1, AMOUNT_1, MARGIN_1);
 
-		assertEquals(1, magazineManager.addPosition(position));
-		assertEquals(0, magazineManager.removeOnePosition(position));
+		magazineManager.addPosition(position);
+		
+		position.setId(magazineManager.getAllPositions().get(0).getId());
+		
+		int currentCountingResult = magazineManager.getCount();
+		
+		magazineManager.removeOnePosition(position);
+		
+		int countingResult = magazineManager.getCount();
+		
+		assertEquals(1, currentCountingResult - countingResult);
 	}
 
 	@Test
