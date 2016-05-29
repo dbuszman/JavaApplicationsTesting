@@ -103,6 +103,8 @@ public class ToOrderManagerTest {
 	@Test
 	public void checkGettingOrderedPositions() throws SQLException {
 		
+		toOrderManager.removeOrders();
+		
 		ToOrder order = new ToOrder(ORDEREDAMOUNT_1, PRICE_1);
 		ToOrder order2 = new ToOrder(ORDEREDAMOUNT_2, PRICE_2);
 		
@@ -121,9 +123,7 @@ public class ToOrderManagerTest {
 		
 		List<Storage> orderedPositions = toOrderManager.getOrderedPositions();
 		
-		Storage lastOrderedDevice = orderedPositions.get(orderedPositions.size() - 1);
-		
-		assertEquals(positionRetrieved.getIdPosition(), lastOrderedDevice.getIdPosition());
+		assertEquals(1, orderedPositions.size());
 		
 	}
 

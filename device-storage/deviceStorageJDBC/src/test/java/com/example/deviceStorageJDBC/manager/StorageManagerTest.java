@@ -64,11 +64,12 @@ public class StorageManagerTest {
 
 		storageManager.addPosition(position);
 		
-		position.setIdPosition(storageManager.getAllPositions().get(0).getIdPosition());
+		List<Storage> positions = storageManager.getAllPositions();
+		Storage positionRetrieved = positions.get(positions.size() - 1);
 		
 		int currentCountingResult = storageManager.getCount();
 		
-		storageManager.removeOnePosition(position);
+		storageManager.removeOnePosition(positionRetrieved);
 		
 		int countingResult = storageManager.getCount();
 		
@@ -147,6 +148,24 @@ public class StorageManagerTest {
 		int numberOfPositions = storageManager.getPositionsWithLowAmount(MIN_AMOUNT).size();
 		
 		assertEquals(1, numberOfPositions - currentNumberOfPositions);
+	}
+	
+	@Test
+	public void checkFindingDeviceById() {
+		
+		Storage position = new Storage(NAME_1, AMOUNT_1, MARGIN_1);
+		
+		storageManager.addPosition(position);
+		
+		List<Storage> positions = storageManager.getAllPositions();
+		Storage positionRetrieved = positions.get(positions.size() - 1);
+		
+		Storage positionById = storageManager.getPositionById(positionRetrieved.getIdPosition());
+		
+		assertEquals(positionRetrieved.getIdPosition(), positionById.getIdPosition());
+		assertEquals(positionRetrieved.getAmount(), positionById.getAmount());
+		assertEquals(positionRetrieved.getName(), positionById.getName());
+		
 	}
 
 }
