@@ -98,7 +98,7 @@ public class StorageManager {
 		return count;
 	}
 
-	void removePositions() throws SQLException {
+	public void removePositions() throws SQLException {
 
 		try {
 			connection.setAutoCommit(false);
@@ -111,7 +111,7 @@ public class StorageManager {
 		}
 	}
 
-	void updatePositions(int margin, int amount) throws SQLException {
+	public void updatePositions(int margin, int amount) throws SQLException {
 
 		int records = getCount();
 		List<Storage> positions = getAllPositions();
