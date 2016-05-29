@@ -1,7 +1,6 @@
 package com.example.deviceStorageJDBC.manager;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -42,28 +41,22 @@ public class ToOrderManagerTest {
 	@Test
 	public void checkUpdatingFK() throws SQLException {
 
-		ToOrder order = new ToOrder(ORDEREDAMOUNT_1, PRICE_1);
-
-		assertEquals(1, toOrderManager.addOrder(order));
-
-		toOrderManager.updateForeignKeyToNull(order);
-
-		List<ToOrder> orders = toOrderManager.getAllOrders();
-		ToOrder orderRetrieved = orders.get(0);
-
-		assertNotNull(orderRetrieved.getIdStorage());
-	}
-
-	@Test
-	public void checkUpdatingFK2() throws SQLException {
-
 		ToOrder order = new ToOrder(ORDEREDAMOUNT_2, PRICE_2);
 
 		assertEquals(1, toOrderManager.addOrder(order));
 
-		toOrderManager.updateForeignKey(order, position);
+		List<ToOrder> orders = toOrderManager.getAllOrders();
+		ToOrder orderRetrieved = orders.get(orders.size() - 1);
+		
+		List<Storage> positions = storageManager.getAllPositions();
+		Storage positionRetrieved = positions.get(positions.size() - 1);
 
-		assertEquals(order.getIdStorage(), position.getIdPosition());
+		toOrderManager.updateForeignKey(orderRetrieved, positionRetrieved);
+		
+		orders = toOrderManager.getAllOrders();
+		orderRetrieved = orders.get(orders.size() - 1);
+
+		assertEquals((long)orderRetrieved.getIdStorage(), positionRetrieved.getIdPosition());
 	}
 
 	@Test

@@ -105,18 +105,6 @@ private Connection connection;
 	    }
 	}
 	
-	void updateForeignKeyToNull(ToOrder order){
-		
-		try {
-			updateOrderStmt.setObject(1, null);
-			updateOrderStmt.setLong(2, order.getIdOrder());
-			updateOrderStmt.executeUpdate();
-		}
-		catch (SQLException e){
-			e.printStackTrace();
-		}
-	}
-	
 	void updateForeignKey(ToOrder order, Storage position){
 		
 		try {

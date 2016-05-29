@@ -4,7 +4,7 @@ public class ToOrder {
 	
 	private long idOrder;
 
-	private long idStorage;
+	private Long idStorage;
 
 	private int orderedAmount;
 
@@ -26,11 +26,11 @@ public class ToOrder {
 		this.idOrder = idOrder;
 	}
 
-	public long getIdStorage() {
+	public Long getIdStorage() {
 		return idStorage;
 	}
 
-	public void setIdStorage(long idStorage) {
+	public void setIdStorage(Long idStorage) {
 		this.idStorage = idStorage;
 	}
 
