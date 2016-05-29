@@ -27,7 +27,9 @@ private Connection connection;
 	private PreparedStatement deleteAllOrdersStmt;
 	private PreparedStatement updateOrderStmt;
 	private PreparedStatement getAllOrdersStmt;
+	private PreparedStatement getAllOrdersByPositionIdStmt;
 	private PreparedStatement countAllOrdersStmt;
+	private PreparedStatement getOrderedPositionsStmt;
 
 
 	private Statement statement;
@@ -62,6 +64,10 @@ private Connection connection;
 					.prepareStatement("DELETE FROM ToOrder");
 			getAllOrdersStmt = connection
 					.prepareStatement("SELECT id_order, id_storage, amount_to_order, price FROM ToOrder");
+			getAllOrdersByPositionIdStmt = connection
+					.prepareStatement("SELECT id_order, id_storage, amount_to_order, price FROM ToOrder WHERE id_storage = ?");
+			getOrderedPositionsStmt = connection
+					.prepareStatement("SELECT DISTINCT id_storage FROM ToOrder");
 			updateOrderStmt = connection
 					.prepareStatement("UPDATE ToOrder SET id_storage = ? WHERE id_order = ?");
 			countAllOrdersStmt = connection
@@ -151,6 +157,45 @@ private Connection connection;
 				orders.add(tor);
 			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
+	
+	public List<Storage> getOrderedPositions() {
+		List<Storage> positions = new ArrayList<Storage>();
+		
+		try {
+			ResultSet rs = getOrderedPositionsStmt.executeQuery();
+			
+			while (rs.next()) {
+				long idStorage = rs.getLong("id_storage");
+				Storage positionRetrieved = storageManager.getPositionById(idStorage);
+				positions.add(positionRetrieved);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return positions;
+	}
+	
+	public List<ToOrder> getAllOrdersForDeviceInStorage(Storage position){
+		List<ToOrder> orders = new ArrayList<ToOrder>();
+		
+		try {
+			getAllOrdersByPositionIdStmt.setLong(1, position.getIdPosition());
+			ResultSet rs = getAllOrdersByPositionIdStmt.executeQuery();
+
+			while (rs.next()) {
+				ToOrder tor = new ToOrder();
+				tor.setIdOrder(rs.getInt("id_order"));
+				tor.setIdStorage(rs.getLong("id_storage"));
+				tor.setOrderedAmount(rs.getInt("amount_to_order"));
+				tor.setPrice(rs.getDouble("price"));
+				orders.add(tor);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -16,8 +16,8 @@ public class ToOrderManagerTest {
 	ToOrderManager toOrderManager = new ToOrderManager();
 	StorageManager storageManager = new StorageManager();
 
-	private final static int ORDEREDAMOUNT_2 = 5;
-	private final static float PRICE_2 = 500;
+	private final static int ORDEREDAMOUNT_2 = 10;
+	private final static float PRICE_2 = 1000;
 
 	private final static int ORDEREDAMOUNT_1 = 5;
 	private final static float PRICE_1 = 500;
@@ -67,10 +67,64 @@ public class ToOrderManagerTest {
 		assertEquals(1, toOrderManager.addOrder(order));
 
 		List<ToOrder> orders = toOrderManager.getAllOrders();
-		ToOrder orderRetrieved = orders.get(0);
+		ToOrder orderRetrieved = orders.get(orders.size() - 1);
 
 		assertEquals(ORDEREDAMOUNT_1, orderRetrieved.getOrderedAmount());
 		assertEquals(PRICE_1, orderRetrieved.getPrice(), 0.0d);
+	}
+	
+	@Test
+	public void checkGettingAllOrdersByPositionId() throws SQLException {
+		
+		ToOrder order = new ToOrder(ORDEREDAMOUNT_1, PRICE_1);
+		ToOrder order2 = new ToOrder(ORDEREDAMOUNT_2, PRICE_2);
+		
+		toOrderManager.addOrder(order);
+		toOrderManager.addOrder(order2);
+		
+		List<ToOrder> orders = toOrderManager.getAllOrders();
+		ToOrder orderRetrieved = orders.get(orders.size() - 1);
+		ToOrder orderRetrieved2 = orders.get(orders.size() - 2);
+		
+		List<Storage> positions = storageManager.getAllPositions();
+		Storage positionRetrieved = positions.get(positions.size() - 1);
+		
+		toOrderManager.updateForeignKey(orderRetrieved, positionRetrieved);
+		toOrderManager.updateForeignKey(orderRetrieved2, positionRetrieved);
+		
+		List<ToOrder> ordersByPositionInStorage = toOrderManager.getAllOrdersForDeviceInStorage(positionRetrieved);
+		
+		int ordersWithPositonAmount = ordersByPositionInStorage.size();
+		
+		assertEquals(2, ordersWithPositonAmount);
+		
+	}
+	
+	@Test
+	public void checkGettingOrderedPositions() throws SQLException {
+		
+		ToOrder order = new ToOrder(ORDEREDAMOUNT_1, PRICE_1);
+		ToOrder order2 = new ToOrder(ORDEREDAMOUNT_2, PRICE_2);
+		
+		toOrderManager.addOrder(order);
+		toOrderManager.addOrder(order2);
+		
+		List<ToOrder> orders = toOrderManager.getAllOrders();
+		ToOrder orderRetrieved = orders.get(orders.size() - 1);
+		ToOrder orderRetrieved2 = orders.get(orders.size() - 2);
+		
+		List<Storage> positions = storageManager.getAllPositions();
+		Storage positionRetrieved = positions.get(positions.size() - 1);
+		
+		toOrderManager.updateForeignKey(orderRetrieved, positionRetrieved);
+		toOrderManager.updateForeignKey(orderRetrieved2, positionRetrieved);
+		
+		List<Storage> orderedPositions = toOrderManager.getOrderedPositions();
+		
+		Storage lastOrderedDevice = orderedPositions.get(orderedPositions.size() - 1);
+		
+		assertEquals(positionRetrieved.getIdPosition(), lastOrderedDevice.getIdPosition());
+		
 	}
 
 	@Test

@@ -26,6 +26,7 @@ public class StorageManager {
 	private PreparedStatement updatePositionsStmt;
 	private PreparedStatement countAllPositionsStmt;
 	private PreparedStatement getPositionsWithLowAmountStmt;
+	private PreparedStatement getPositionByIdStmt;
 
 	private Statement statement;
 	
@@ -60,6 +61,8 @@ public class StorageManager {
 					.prepareStatement("SELECT COUNT(*) FROM Storage");
 			getPositionsWithLowAmountStmt = connection
 					.prepareStatement("Select id_position, name, amount, margin FROM Storage WHERE amount < ?");
+			getPositionByIdStmt = connection
+					.prepareStatement("Select id_position, name, amount, margin FROM Storage WHERE id_position = ?");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -176,7 +179,7 @@ public class StorageManager {
 			ResultSet rs = getPositionsWithLowAmountStmt.executeQuery();
 			while (rs.next()) {
 				Storage position = new Storage();
-				position.setIdPosition(rs.getInt("id_position"));
+				position.setIdPosition(rs.getLong("id_position"));
 				position.setName(rs.getString("name"));
 				position.setAmount(rs.getInt("amount"));
 				position.setMargin(rs.getInt("margin"));
@@ -187,6 +190,25 @@ public class StorageManager {
 			e.printStackTrace();
 		}
 		return positionsWithLowAmount;
+	}
+	
+	public Storage getPositionById(long id_position){
+		
+		Storage positionById = new Storage();
+		
+		try{
+			getPositionByIdStmt.setLong(1, id_position);
+			ResultSet rs = getPositionByIdStmt.executeQuery();
+			rs.next();
+			positionById.setIdPosition(rs.getLong("id_position"));
+			positionById.setName(rs.getString("name"));
+			positionById.setAmount(rs.getInt("amount"));
+			positionById.setMargin(rs.getInt("margin"));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return positionById;
 	}
 
 }
