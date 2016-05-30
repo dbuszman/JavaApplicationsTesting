@@ -48,6 +48,17 @@ public class StorageServiceTest {
 	    	post("/storage/").
 	    then().
 	    	assertThat().statusCode(201);
-
+		
+		expect().body("storage.size()", equalTo(4)).when().get("/storage/all");
 	}
+	
+	@Test
+	public void checkDeletingAllDevices(){
+		
+		delete("/storage").then().assertThat().statusCode(200);
+		
+		expect().body(equalToIgnoringCase("null")).when().get("/storage/all");
+	}
+	
+	
 }
