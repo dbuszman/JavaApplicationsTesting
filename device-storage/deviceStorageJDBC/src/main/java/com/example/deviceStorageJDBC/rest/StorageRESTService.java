@@ -1,6 +1,7 @@
 package com.example.deviceStorageJDBC.rest;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -26,6 +27,14 @@ public class StorageRESTService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Storage getPositionById(@PathParam("idPosition") long id_position){
 		Storage position = storageManager.getPositionById(id_position);
+		return position;
+	}
+	
+	@GET
+	@Path("/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Storage> getAllPositions(){
+		List <Storage> position = storageManager.getAllPositions();
 		return position;
 	}
 	

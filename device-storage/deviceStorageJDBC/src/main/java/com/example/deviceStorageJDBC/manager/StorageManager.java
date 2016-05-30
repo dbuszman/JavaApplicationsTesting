@@ -199,16 +199,20 @@ public class StorageManager {
 		try{
 			getPositionByIdStmt.setLong(1, id_position);
 			ResultSet rs = getPositionByIdStmt.executeQuery();
-			rs.next();
-			positionById.setIdPosition(rs.getLong("id_position"));
-			positionById.setName(rs.getString("name"));
-			positionById.setAmount(rs.getInt("amount"));
-			positionById.setMargin(rs.getInt("margin"));
+			while (rs.next()) {
+				positionById.setIdPosition(rs.getLong("id_position"));
+				positionById.setName(rs.getString("name"));
+				positionById.setAmount(rs.getInt("amount"));
+				positionById.setMargin(rs.getInt("margin"));
+				break;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return positionById;
 	}
+	
+	
 
 }

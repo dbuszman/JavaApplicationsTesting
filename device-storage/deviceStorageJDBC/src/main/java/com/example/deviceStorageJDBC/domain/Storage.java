@@ -16,6 +16,13 @@ public class Storage {
 	public Storage() {
 	}
 	
+	public Storage(long idPosition, String name, int amount, int margin) {
+		this.idPosition = idPosition;
+		this.name = name;
+		this.amount = amount;
+		this.margin = margin;
+	}
+	
 	public Storage(String name, int amount, int margin) {
 		this.name = name;
 		this.amount = amount;
