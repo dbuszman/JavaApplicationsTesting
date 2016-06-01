@@ -30,6 +30,7 @@ private Connection connection;
 	private PreparedStatement getAllOrdersByPositionIdStmt;
 	private PreparedStatement countAllOrdersStmt;
 	private PreparedStatement getOrderedPositionsStmt;
+	private PreparedStatement getOrderByIdStmt;
 
 
 	private Statement statement;
@@ -72,6 +73,9 @@ private Connection connection;
 					.prepareStatement("UPDATE ToOrder SET id_storage = ? WHERE id_order = ?");
 			countAllOrdersStmt = connection
 					.prepareStatement("SELECT COUNT(*) FROM ToOrder");
+			getOrderByIdStmt = connection
+					.prepareStatement("SELECT id_order, id_storage, amount_to_order, price FROM ToOrder WHERE id_order = ?");
+
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -84,7 +88,7 @@ private Connection connection;
 		return connection;
 	}
 	
-	int removeOneOrder(ToOrder order) {
+	public int removeOneOrder(ToOrder order) {
 		
 		int count = 0;
 		try {
@@ -97,7 +101,7 @@ private Connection connection;
 		return count;
 	}
 	
-	void removeOrders() throws SQLException {
+	public void removeOrders() throws SQLException {
 		
 		try {
 			connection.setAutoCommit(false);
@@ -111,7 +115,7 @@ private Connection connection;
 	    }
 	}
 	
-	void updateForeignKey(ToOrder order, Storage position){
+	public void updateForeignKey(ToOrder order, Storage position){
 		
 		try {
 			updateOrderStmt.setLong(1, position.getIdPosition());;
@@ -161,6 +165,27 @@ private Connection connection;
 			e.printStackTrace();
 		}
 		return orders;
+	}
+	
+	public ToOrder getOrderById(long orderId){
+		
+		ToOrder orderById = new ToOrder();
+		
+		try{
+			getOrderByIdStmt.setLong(1, orderId);
+			ResultSet rs = getOrderByIdStmt.executeQuery();
+			while (rs.next()) {
+				orderById.setIdOrder(rs.getLong("id_order"));
+				orderById.setIdStorage(rs.getLong("id_storage"));
+				orderById.setOrderedAmount(rs.getInt("amount_to_order"));
+				orderById.setPrice(rs.getDouble("price"));
+				break;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orderById;
 	}
 	
 	public List<Storage> getOrderedPositions() {

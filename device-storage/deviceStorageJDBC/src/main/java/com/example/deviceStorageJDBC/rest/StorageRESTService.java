@@ -16,11 +16,13 @@ import javax.ws.rs.core.Response;
 
 import com.example.deviceStorageJDBC.domain.Storage;
 import com.example.deviceStorageJDBC.manager.StorageManager;
+import com.example.deviceStorageJDBC.manager.ToOrderManager;
 
 @Path("storage")
 public class StorageRESTService {
 	
 	StorageManager storageManager = new StorageManager();
+	ToOrderManager toOrderManager = new ToOrderManager();
 
 	@GET
 	@Path("/{idPosition}")
@@ -36,6 +38,14 @@ public class StorageRESTService {
 	public List<Storage> getAllPositions(){
 		List <Storage> position = storageManager.getAllPositions();
 		return position;
+	}
+	
+	@GET
+	@Path("/orderedPositions")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Storage> getOrderedPositions(){
+		List <Storage> orderedPositions = toOrderManager.getOrderedPositions();
+		return orderedPositions;
 	}
 	
 	@POST

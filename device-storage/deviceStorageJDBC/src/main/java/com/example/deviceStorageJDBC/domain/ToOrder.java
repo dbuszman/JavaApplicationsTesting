@@ -21,6 +21,13 @@ public class ToOrder {
 		this.price = price;
 	}
 
+	public ToOrder(long idOrder, Long idStorage, int orderedAmount, double price) {
+		this.idOrder = idOrder;
+		this.idStorage = idStorage;
+		this.orderedAmount = orderedAmount;
+		this.price = price;
+	}
+
 	public long getIdOrder() {
 		return idOrder;
 	}
