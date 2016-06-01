@@ -163,5 +163,41 @@ public class ToOrderServiceTest {
 		assertEquals((long)orderRetrieved.getIdStorage(), positionRetrieved.getIdPosition());
 	}
 	
+	@Test
+	public void checkGettingAllOrdersByPositionId() throws SQLException {
+		
+		StorageServiceTest storageHelper = new StorageServiceTest();
+		
+		ToOrder order = new ToOrder(ORDEREDAMOUNT_1, PRICE_1);
+		ToOrder order2 = new ToOrder(ORDEREDAMOUNT_2, PRICE_2);
+		
+		given().contentType(MediaType.APPLICATION_JSON).body(order).when().post("/toorder/");
+		given().contentType(MediaType.APPLICATION_JSON).body(order2).when().post("/toorder/");
+		
+		List<ToOrder> allOrdersFromRest = getOrders("all");
+		ToOrder orderRetrieved = allOrdersFromRest.get(allOrdersFromRest.size() - 1);
+		ToOrder orderRetrieved2 = allOrdersFromRest.get(allOrdersFromRest.size() - 2);
+		
+		List<Storage> positions = storageHelper.getDevices("all");
+		Storage positionRetrieved = positions.get(positions.size() - 1);
+		
+		given().
+	       contentType(MediaType.APPLICATION_JSON).
+	       body(order).
+	    when().put("/toorder/" + orderRetrieved.getIdOrder() + "/" + positionRetrieved.getIdPosition());
+		
+		given().
+	       contentType(MediaType.APPLICATION_JSON).
+	       body(order2).
+	    when().put("/toorder/" + orderRetrieved2.getIdOrder() + "/" + positionRetrieved.getIdPosition());
+		
+		List<ToOrder> ordersByPositionInStorage = getOrders("ordersForDevice/" + positionRetrieved.getIdPosition());
+		
+		int ordersWithPositonAmount = ordersByPositionInStorage.size();
+		
+		assertEquals(2, ordersWithPositonAmount);
+		
+	}
+	
 	
 }

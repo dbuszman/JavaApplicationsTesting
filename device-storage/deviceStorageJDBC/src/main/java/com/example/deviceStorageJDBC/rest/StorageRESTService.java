@@ -48,6 +48,14 @@ public class StorageRESTService {
 		return orderedPositions;
 	}
 	
+	@GET
+	@Path("/lowAmount/{amount}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Storage> getPositionsWithLowAmount(@PathParam("amount") int amount){
+		List <Storage> positions = storageManager.getPositionsWithLowAmount(amount);
+		return positions;
+	}
+	
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)

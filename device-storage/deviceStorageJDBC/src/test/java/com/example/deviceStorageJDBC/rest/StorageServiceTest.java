@@ -30,8 +30,12 @@ public class StorageServiceTest {
 	private final static int MARGIN_1 = 10;
 	
 	private final static String NAME_2 = "Intel SSD 750";
-	private final static int AMOUNT_2 = 1;
+	private final static int AMOUNT_2 = 3;
 	private final static int MARGIN_2 = 8;
+	
+	private final static String NAME_3 = "Nvidia GF 950 GTX";
+	private final static int AMOUNT_3 = 1;
+	private final static int MARGIN_3 = 10;
 	
 	private final static int ORDEREDAMOUNT_2 = 10;
 	private final static float PRICE_2 = 1000;
@@ -126,6 +130,23 @@ public class StorageServiceTest {
 	}
 	
 	@Test
+	public void checkGettingPositionsWithLowAmount(){
+		
+		delete("/storage").then().assertThat().statusCode(200);
+		
+		Storage storage = new Storage(NAME_2, AMOUNT_2, MARGIN_2);
+		given().contentType(MediaType.APPLICATION_JSON).body(storage).when().post("/storage/");
+		
+		Storage storage2 = new Storage(NAME_3, AMOUNT_3, MARGIN_3);
+		given().contentType(MediaType.APPLICATION_JSON).body(storage2).when().post("/storage/");
+		
+		List<Storage> allDevicesFromRest = getDevices("lowAmount/" + MIN_AMOUNT);
+		
+		assertEquals(1, allDevicesFromRest.size());
+		assertEquals(NAME_3, allDevicesFromRest.get(0).getName());
+	}
+	
+	@Test
 	public void checkDeletingAllDevices(){
 		
 		delete("/storage").then().assertThat().statusCode(200);
@@ -138,7 +159,7 @@ public class StorageServiceTest {
 		
 		delete("/storage").then().assertThat().statusCode(200);
 		
-		Storage storage = new Storage(NAME_2, AMOUNT_2, MARGIN_2);
+		Storage storage = new Storage(NAME_3, AMOUNT_3, MARGIN_3);
 		given().contentType(MediaType.APPLICATION_JSON).body(storage).when().post("/storage/");
 		
 		given().
