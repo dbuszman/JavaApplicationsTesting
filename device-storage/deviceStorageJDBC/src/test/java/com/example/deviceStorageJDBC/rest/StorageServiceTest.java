@@ -1,8 +1,5 @@
 package com.example.deviceStorageJDBC.rest;
 
-import static com.jayway.restassured.RestAssured.delete;
-import static com.jayway.restassured.RestAssured.expect;
-import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.junit.Assert.*;
@@ -69,8 +66,9 @@ public class StorageServiceTest {
 		
 		
 		JsonValue jsonValue = Json.parse(json);
+		boolean jsonType = jsonValue.asObject().get("storage").isArray();
 		
-		if(jsonValue.isArray()){
+		if(jsonType){
 			JsonArray items = jsonValue.asObject().get("storage").asArray();
 			
 			for (JsonValue item : items) {
@@ -104,6 +102,21 @@ public class StorageServiceTest {
 		
 		List<Storage> allDevicesFromRestAfterAdd = getAllDevices();
 		assertEquals(allDevicesFromRestAfterAdd.size(), 1);
+	}
+	
+	@Test
+	public void checkGettingPositionById(){
+		
+		Storage storage = new Storage(NAME_2, AMOUNT_2, MARGIN_2);
+		given().contentType(MediaType.APPLICATION_JSON).body(storage).when().post("/storage/");
+		
+		List<Storage> allDevicesFromRest = getAllDevices();
+		
+		long positionId = allDevicesFromRest.get(allDevicesFromRest.size() - 1).getIdPosition();
+		
+		Storage retrievedPosition = get("/storage/" + positionId).as(Storage.class);
+		
+		assertEquals(NAME_2, retrievedPosition.getName());
 	}
 	
 	@Test
