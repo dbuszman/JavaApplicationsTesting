@@ -86,7 +86,7 @@ public class StorageManager {
 		return 0;
 	}
 
-	int removeOnePosition(Storage position) {
+	public int removeOnePosition(Storage position) {
 
 		int count = 0;
 		try {

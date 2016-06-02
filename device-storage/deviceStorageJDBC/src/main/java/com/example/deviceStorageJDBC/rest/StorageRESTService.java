@@ -79,8 +79,12 @@ public class StorageRESTService {
 	}
 	
 	@DELETE
-	public Response removePositions() throws SQLException{
-		storageManager.removePositions();
+	@Path("/{idPosition}")
+	public Response removePositions(@PathParam("idPosition") long id_position) throws SQLException{
+		Storage position = storageManager.getPositionById(id_position);
+		storageManager.removeOnePosition(position);
 		return Response.status(200).build();
 	}
+	
+	
 }
