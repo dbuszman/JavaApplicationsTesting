@@ -155,6 +155,24 @@ public class StorageServiceTest {
 	}
 	
 	@Test
+	public void checkDeletingOneDevice(){
+		
+		Storage storage = new Storage(NAME_2, AMOUNT_2, MARGIN_2);
+		given().contentType(MediaType.APPLICATION_JSON).body(storage).when().post("/storage/");
+		
+		List<Storage> allDevicesFromRest = getDevices("all");
+		
+		long positionId = allDevicesFromRest.get(allDevicesFromRest.size() - 1).getIdPosition();
+		
+		delete("/storage/" + positionId).then().assertThat().statusCode(200);
+		
+		Storage retrievedPosition = get("/storage/" + positionId).as(Storage.class);
+		
+		assertEquals(null, retrievedPosition.getName());
+	}
+	
+	
+	@Test
 	public void checkUpdatingPositionInStorage() throws JSONException{
 		
 		delete("/storage").then().assertThat().statusCode(200);
