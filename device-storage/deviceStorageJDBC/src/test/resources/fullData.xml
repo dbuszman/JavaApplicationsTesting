@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <STORAGE ID_POSITION="1" NAME="Intel i7 2,8Ghz 4gen" AMOUNT="3" MARGIN="10"/>
+  <STORAGE ID_POSITION="2" NAME="Nvidia GF 950 GTX" AMOUNT="1" MARGIN="10"/>
+  <STORAGE ID_POSITION="3" NAME="Intel i5 2,8Ghz 6gen" AMOUNT="4" MARGIN="10"/>
+  <STORAGE ID_POSITION="4" NAME="Intel SSD" AMOUNT="5" MARGIN="10"/>
+</dataset>
