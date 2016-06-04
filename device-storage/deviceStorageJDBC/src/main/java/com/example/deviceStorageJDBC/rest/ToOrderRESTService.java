@@ -42,6 +42,15 @@ public class ToOrderRESTService {
 	}
 	
 	@GET
+	@Path("/count")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getCountOrders(){
+		String count = Integer.toString(toOrderManager.getCount());
+		return count;
+	}
+	
+	
+	@GET
 	@Path("/ordersForDevice/{idPosition}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<ToOrder> getOrdersForDevice(@PathParam("idPosition") long id_position){

@@ -49,6 +49,14 @@ public class StorageRESTService {
 	}
 	
 	@GET
+	@Path("/count")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getCountDevices(){
+		String count = Integer.toString(storageManager.getCount());
+		return count;
+	}
+	
+	@GET
 	@Path("/lowAmount/{amount}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Storage> getPositionsWithLowAmount(@PathParam("amount") int amount){

@@ -128,6 +128,20 @@ public class ToOrderServiceTest {
 	}
 	
 	@Test
+	public void checkGettingDevicesCount(){
+		
+		delete("/toorder").then().assertThat().statusCode(200);
+		
+		ToOrder toorder0 = new ToOrder(ORDEREDAMOUNT_1, PRICE_1);
+		given().contentType(MediaType.APPLICATION_JSON).body(toorder0).when().post("/toorder/");
+		
+		ToOrder toorder1 = new ToOrder(ORDEREDAMOUNT_2, PRICE_2);
+		given().contentType(MediaType.APPLICATION_JSON).body(toorder1).when().post("/toorder/");
+		
+		expect().body(equalToIgnoringCase("2")).when().get("/toorder/count");
+	}
+	
+	@Test
 	public void checkDeletingAllOrders(){
 		
 		delete("/toorder").then().assertThat().statusCode(200);

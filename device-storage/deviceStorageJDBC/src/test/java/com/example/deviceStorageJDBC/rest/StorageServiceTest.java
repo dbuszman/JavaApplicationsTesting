@@ -147,6 +147,23 @@ public class StorageServiceTest {
 	}
 	
 	@Test
+	public void checkGettingDevicesCount(){
+		
+		delete("/storage").then().assertThat().statusCode(200);
+		
+		Storage storage0 = new Storage(NAME_1, AMOUNT_1, MARGIN_1);
+		given().contentType(MediaType.APPLICATION_JSON).body(storage0).when().post("/storage/");
+		
+		Storage storage1 = new Storage(NAME_2, AMOUNT_2, MARGIN_2);
+		given().contentType(MediaType.APPLICATION_JSON).body(storage1).when().post("/storage/");
+		
+		Storage storage2 = new Storage(NAME_3, AMOUNT_3, MARGIN_3);
+		given().contentType(MediaType.APPLICATION_JSON).body(storage2).when().post("/storage/");
+		
+		expect().body(equalToIgnoringCase("3")).when().get("/storage/count");
+	}
+	
+	@Test
 	public void checkDeletingAllDevices(){
 		
 		delete("/storage").then().assertThat().statusCode(200);
