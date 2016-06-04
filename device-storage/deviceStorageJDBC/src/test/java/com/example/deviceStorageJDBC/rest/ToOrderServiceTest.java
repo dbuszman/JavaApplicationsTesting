@@ -128,11 +128,28 @@ public class ToOrderServiceTest {
 	}
 	
 	@Test
-	public void checkDeletingAllDevices(){
+	public void checkDeletingAllOrders(){
 		
 		delete("/toorder").then().assertThat().statusCode(200);
 		
 		expect().body(equalToIgnoringCase("null")).when().get("/toorder/all");
+	}
+	
+	@Test
+	public void checkDeletingOneOrder(){
+		
+		ToOrder toorder = new ToOrder(ORDEREDAMOUNT_2, PRICE_2);
+		given().contentType(MediaType.APPLICATION_JSON).body(toorder).when().post("/toorder/");
+		
+		List<ToOrder> allOrdersFromRest = getOrders("all");
+		
+		long orderId = allOrdersFromRest.get(allOrdersFromRest.size() - 1).getIdOrder();
+		
+		delete("/toorder/" + orderId).then().assertThat().statusCode(200);
+		
+		ToOrder retrievedToOrder = get("/toorder/" + orderId).as(ToOrder.class);
+		
+		assertEquals(0, retrievedToOrder.getIdOrder());
 	}
 	
 	@Test

@@ -28,8 +28,8 @@ public class ToOrderRESTService {
 	@GET
 	@Path("/{idOrder}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ToOrder getOrderById(@PathParam("idOrder") long id_position){
-		ToOrder toOrder = toOrderManager.getOrderById(id_position);
+	public ToOrder getOrderById(@PathParam("idOrder") long idOrder){
+		ToOrder toOrder = toOrderManager.getOrderById(idOrder);
 		return toOrder;
 	}
 	
@@ -40,8 +40,6 @@ public class ToOrderRESTService {
 		List <ToOrder> toOrders = toOrderManager.getAllOrders();
 		return toOrders;
 	}
-	
-
 	
 	@GET
 	@Path("/ordersForDevice/{idPosition}")
@@ -77,6 +75,14 @@ public class ToOrderRESTService {
 	@DELETE
 	public Response removeOrders() throws SQLException{
 		toOrderManager.removeOrders();
+		return Response.status(200).build();
+	}
+	
+	@DELETE
+	@Path("/{idOrder}")
+	public Response removeOneOrder(@PathParam("idOrder") long idOrder) throws SQLException{
+		ToOrder toOrder = toOrderManager.getOrderById(idOrder);
+		toOrderManager.removeOneOrder(toOrder);
 		return Response.status(200).build();
 	}
 
