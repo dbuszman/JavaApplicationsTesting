@@ -283,7 +283,7 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;amount&quot;:&quot;${amount}&quot;,&#xd;
-	&quot;margin&quot;:&quot;${__javaScript(Math.round(Math.random()*1000)/100)}&quot;,&#xd;
+	&quot;margin&quot;:&quot;${__Random(1,20,)}&quot;,&#xd;
 	&quot;name&quot;:&quot;${__RandomString(10,abcdefg)}&quot;&#xd;
 }&#xd;
 </stringProp>
