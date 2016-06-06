@@ -5,7 +5,7 @@
 > *Devices storage*
 
 ***
-Program zawiera:
+Projekt zawiera:
 * JDBC (dwie encje) + testy
 * REST Service + REST ASSURED
 * JMeter (JDBC + HTTP)
