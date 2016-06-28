@@ -1,2 +1,2 @@
-# testowanie-java
-Testowanie aplikacji Java
+# JavaApplicationsTesting
+Testing Applications in Java
